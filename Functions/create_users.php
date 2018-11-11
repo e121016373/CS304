@@ -1,11 +1,14 @@
-<?php include "applicants.php"; ?>
-<?php include "employers.php"; ?>
 <?php
 
 //Creat new normal user
 function createApplicant() {
 	if(isset($_POST["submit"])) {
-		global $connection;
+		$connection = mysqli_connect('localhost', 'root', '', 'applicants');
+
+		if(!$connection) {
+			die("Database connection fails");
+			}
+
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['password']);
 		$sin = mysqli_real_escape_string($connection, $_POST['sin']);
@@ -17,7 +20,7 @@ function createApplicant() {
 		$industry = mysqli_real_escape_string($connection, $_POST['industry']);
 
 
-		$query = 'INSERT INTO users(username, password)';
+		$query = 'INSERT INTO applicants(username, password sin, contact info, name, pysiological info, work experience, edication, industry)';
 		$query .= "VALUES ('$username', '$password', '$sin','$contactinfo','$name','$pysiologicalinfo','$workexperience','$education', '$industry')";
 
 
@@ -33,7 +36,12 @@ function createApplicant() {
 //Creat new employer
 function createEmployer() {
 	if(isset($_POST["submit"])) {
-		global $connection;
+		$connection = mysqli_connect('localhost', 'root', '', 'employers');
+
+		if(!$connection) {
+			die("Database connection fails");
+			}
+			
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['password']);
 		$sin = mysqli_real_escape_string($connection, $_POST['sin']);
@@ -46,7 +54,7 @@ function createEmployer() {
 		$cname = mysqli_real_escape_string($connection, $_POST['company_name']);
 
 
-		$query = 'INSERT INTO users(username, password)';
+		$query = 'INSERT INTO employers(username, password, sin, contact info, name, pysiological info, work experience, education, position, company name)';
 		$query .= "VALUES ('$username', '$password', '$sin','$contactinfo','$name','$pysiologicalinfo','$workexperience','$education', '$position', '$cname')";
 
 
