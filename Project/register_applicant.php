@@ -1,10 +1,18 @@
 <!-- Username, Password, SIN, Contact info, Name, Physiological info, Work Experience, Education, industry. -->
 
 
+<?php
+include "Applicants.php";?>
+<?php
+createApplicant();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Register Employer</title>
+	<title>Register Applicant</title>
 </head>
 <body>
 	<h1>Register</h1>
