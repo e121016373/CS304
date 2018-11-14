@@ -195,5 +195,32 @@ values('2314','Tencent', 'We are looking for engineer which good at python and j
 insert into Application
 values('2908', '20180501','0189','I am Milly Kales,I am 28 years old and I graduated from Simon Fraser University and major in general arts.My height is 5.3 and I born in vancouver.','I have three years of working experience in department stores. I am good at communicating with guests and solving problems from the perspective of the guests. I am good at teamwork and used to be the top ten in the annual sales of nordstrom cosmetics division. I can speak English and French.');
 
+insert into Application
+values('2714', '20180301','2314','I am Jessica chou,I am 22 years old and I graduated from University of British Columbia and major in Computer Sciencw.My height is 5.4 and I born in Korea.','I have been internship at Huawei for two months, mainly working on front-end design and resource package maintenance. At the same time, I have achieved excellent results in all subjects in the school. I focus on the learning process and will adopt multiple opinions in my work. I have a good attitude towards my work and my studies. Easy to get along with, strong sense of teamwork and responsibility, willing to team members and make progress together; work hard, and will be completed carefully for all tasks assigned.
+Strong logical thinking ability, can reasonably plan the relationship between work and life.');
+
+
+insert into Evaluation
+values('1876', '1 hour','2018-11-15','12:30:00','20180401','20180501');
+
+
+insert into Evaluation
+values('1879', '2 hour','2018-11-14','12:30:00','20180601','20180301');
+
+insert into OnlineInterview
+values('1876','http://www.amazon.com')
+
+
+insert into PhoneInterview
+values('1876','7783247912')
+
+insert into ExamInterview
+values('1879','1961 E Mall,Vancouver,BC')
+
+insert into Offer
+values('RX1286','1876','16','2018-11-30')
+
+
+
 
 
