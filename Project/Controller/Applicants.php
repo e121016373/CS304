@@ -17,12 +17,11 @@ function createApplicant() {
 
 		$query = 'INSERT INTO person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education)';
 		$query .= "VALUES ('$sin','$password', '$username','$name','$contact_info','$physiological_info','$work_experience','$education')";
-		
-		
+				
 		$result = mysqli_query($connection, $query);
-		$result2 = mysqli_query($connection, 'INSERT INTO applicant(SIN, Industry) VALUES ('$sin', '$industry')');
+		$result2 = mysqli_query($connection, "INSERT INTO applicant(SIN, Industry) VALUES ('$sin', '$industry')");
 		
-		if (!$result and !$result2) {
+		if (!$result or !$result2) {
 			die("Query Failed" . mysqli_error($connection));
 		} else {
 			echo "Record Created";
