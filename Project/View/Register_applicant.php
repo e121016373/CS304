@@ -2,9 +2,12 @@
 
 
 <?php
-include "../Controller/Applicants.php";?>
+include "../Controller/Applicants.php";
+include "../userInfo.php";
+?>
+
 <?php
-createApplicant();
+if(createApplicant()) header("Location:Dashboard_applicant.php");
 ?>
 
 
