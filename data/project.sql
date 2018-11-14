@@ -208,17 +208,17 @@ insert into Evaluation
 values('1879', '2 hour','2018-11-14','12:30:00','20180601','20180301');
 
 insert into OnlineInterview
-values('1876','http://www.amazon.com')
+values('1876','http://www.amazon.com');
 
 
 insert into PhoneInterview
-values('1876','7783247912')
+values('1876','7783247912');
 
 insert into ExamInterview
-values('1879','1961 E Mall,Vancouver,BC')
+values('1879','1961 E Mall,Vancouver,BC');
 
 insert into Offer
-values('RX1286','1876','16','2018-11-30')
+values('RX1286','1876','16','2018-11-30');
 
 
 
