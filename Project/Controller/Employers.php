@@ -150,6 +150,24 @@ function giveOffer() {
 	}
 }
 
+function viewReview() {
+	global $connection;
+
+	if (!$connection) {
+		die('Failed to connect: ' . mysqli_error());
+	}
+
+	$sql = "CREATE VIEW companyReview AS 
+		SELECT *
+		FROM Review
+		WHERE ";
+
+	if (mysqli_query($connection, $sql)) {
+		echo "Record created successfully";
+	} else {
+		echo "Error creating evaluation: ". mysqli_error($connection);
+	}
+}
 ?>
 
 </body>
