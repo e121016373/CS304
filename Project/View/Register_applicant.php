@@ -3,7 +3,6 @@
 
 <?php
 include "../Controller/Applicants.php";
-include "../userInfo.php";
 ?>
 
 <?php
