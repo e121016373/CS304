@@ -1,6 +1,4 @@
-<?php
-
-
+<?php include "View/Employers.php";
 
 ?>
 
@@ -12,7 +10,7 @@
 </head>
 <body>
 	<h1>Register</h1>
-	<form action="register_employer.php" method = post id=registration_form>
+	<form action="Register_employer.php" method = post id=registration_form>
 
 		<label for="username">Username</label>
 		<input id="username" type="text" name="username" required>

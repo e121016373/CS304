@@ -15,7 +15,7 @@
 	<title>login</title>
 </head>
 <body>
-	<form action="login_employer.php" method="post">
+	<form action="Login_employer.php" method="post">
 		<div class = "form-group">
 			<label for="username">Username</label>
 			<input type="text" name="username" class = "form-control">

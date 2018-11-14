@@ -1,14 +1,8 @@
-<html>
 
-<head>
-</head>
-
-<body>
-
-<?php
+<?php includes DB.php;;
 
 function registerCompany() {
-	$connection = mysql_connect("localhost", "my_user", "my_password", "my_db");
+	global $connection;
 
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
@@ -36,7 +30,7 @@ function registerCompany() {
 }
 
 function createJobs() {
-	$connection = mysql_connect("localhost", "my_user", "my_password", "my_db");
+	global $connection;
 
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
@@ -67,7 +61,7 @@ function createJobs() {
 }
 
 function updateJobs() {
-	$connection = mysql_connect("localhost", "my_user", "my_password", "my_db");
+	global $connection;
 
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
@@ -100,7 +94,7 @@ function updateJobs() {
 }
 
 function setEvaluation() {
-	$connection = mysql_connect("localhost", "my_user", "my_password", "my_db");
+	global $connection;
 
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
@@ -130,7 +124,7 @@ function setEvaluation() {
 }
 
 function giveOffer() {
-	$connection = mysql_connect("localhost", "my_user", "my_password", "my_db");
+	global $connection;
 
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());

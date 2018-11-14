@@ -7,6 +7,11 @@ function createRows() {
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['password']);
 
+		$hashFormat = "$2y$10$";
+		$salt = "iuseseomcrazystrings22";
+		$hash_and_salt = $hashFormat . $salt;
+		$password = crypt($password, $hash_and_salt);
+
 
 		$query = 'INSERT INTO users(username, password)';
 		$query .= "VALUES ('$username', '$password')";

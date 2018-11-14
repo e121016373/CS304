@@ -2,10 +2,9 @@
 
 
 <?php
-include "Applicants.php";?>
+include "View/Applicants.php";?>
 <?php
 createApplicant();
-
 ?>
 
 
@@ -16,7 +15,7 @@ createApplicant();
 </head>
 <body>
 	<h1>Register</h1>
-	<form action="register_applicant.php" method = post id=registration_form>
+	<form action="Register_applicant.php" method = post id=registration_form>
 
 		<label for="username">Username</label>
 		<input id="username" type="text" name="username" required>

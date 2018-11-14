@@ -1,5 +1,4 @@
-<!-- <?php include global_var.php ?>  -->
-<?php
+<?php includes DB.php;
 //Allows new user to create new account
 function createApplicant() {
 	if(isset($_POST["submit"])) {
