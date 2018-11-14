@@ -1,31 +1,28 @@
 <?php include "DB.php";
 //Allows new user to create new account
 function createApplicant() {
-	if(isset($_POST["submit"])) {
+	if(isset($_POST["register"])) {
 		global $connection;
-		//$connection = mysqli_connect('localhost', 'root', '', 'applicants');
-
-		if(!$connection) {
-			die("Database connection fails");
-			}
 
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
-		$password = mysqli_real_escape_string($connection, $_POST['password']);
+		$password = mysqli_real_escape_string($connection, $_POST['Password']);
 		$sin = mysqli_real_escape_string($connection, $_POST['sin']);
 		$contactinfo = mysqli_real_escape_string($connection, $_POST['contact_info']);
 		$name = mysqli_real_escape_string($connection, $_POST['name']);
-		$pysiologicalinfo = mysqli_real_escape_string($connection, $_POST['physiological_info']);
+		$physiologicalinfo = mysqli_real_escape_string($connection, $_POST['physiological_info']);
 		$workexperience = mysqli_real_escape_string($connection, $_POST['work_experience']);
 		$education = mysqli_real_escape_string($connection, $_POST['education']);
 		$industry = mysqli_real_escape_string($connection, $_POST['industry']);
 
 
-		$query = 'INSERT INTO applicants(username, password sin, contact info, name, pysiological info, work experience, edication, industry)';
-		$query .= "VALUES ('$username', '$password', '$sin','$contactinfo','$name','$pysiologicalinfo','$workexperience','$education', '$industry')";
-
-
+		$query = 'INSERT INTO person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education)';
+		$query .= "VALUES ('$sin','$password', '$username','$name','$contact_info','$physiological_info','$work_experience','$education')";
+		
+		
 		$result = mysqli_query($connection, $query);
-		if (!$result) {
+		$result2 = mysqli_query($connection, 'INSERT INTO applicant(SIN, Industry) VALUES ('$sin', '$industry')');
+		
+		if (!$result and !$result2) {
 			die("Query Failed" . mysqli_error($connection));
 		} else {
 			echo "Record Created";

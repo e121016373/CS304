@@ -28,7 +28,7 @@ createApplicant();
 		<br>
 
 		<label for="sin">SIN</label>
-		<input id="sin" type="number" name="sin" min= "8" max ="8"required>
+		<input id="sin" type="number" name="sin" size="8" required>
 
 		<br>
 
@@ -48,7 +48,7 @@ createApplicant();
 		<br>
 
 		<label for="work_experience">Work Experience</label>
-		<textarea id="work_experience" type="text" name="contact_info"></textarea>
+		<textarea id="work_experience" type="text" name="work_experience"></textarea>
 
 		<br>
 
@@ -56,6 +56,14 @@ createApplicant();
 		<textarea id="education" type="text" name="education"></textarea>
 
 		<br>
+		
+		<br>
+
+		<label for="industry">Industry</label>
+		<textarea id="industry" type="text" name="industry"></textarea>
+
+		<br>
+		
 		<input type="submit" name="register">
 
 	</form>
