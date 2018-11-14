@@ -1,0 +1,10 @@
+html, body {
+  background-color:lightblue;
+  background-image: url(lookJob.jpeg);
+  backgroud-position:center;
+  backgroup-repeat:no-repeat;
+  margin: 0;
+  font-family: Calibri, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
