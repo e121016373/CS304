@@ -1,11 +1,11 @@
 <?php
 	
 	if(isset($_POST["employer"])) {
-		header("Location:login_employer.php");
+		header("Location:View/Login_employer.php");
 		exit;
 	}
 	if(isset($_POST["applicant"])) {
-		header("Location:login_applicant.php");
+		header("Location:View/Login_applicant.php");
 		exit;
 	}
 

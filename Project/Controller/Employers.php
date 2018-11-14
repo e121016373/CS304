@@ -1,5 +1,5 @@
 
-<?php includes DB.php;;
+<?php include "DB.php";
 
 function registerCompany() {
 	global $connection;

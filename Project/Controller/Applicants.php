@@ -1,4 +1,4 @@
-<?php includes DB.php;
+<?php include "DB.php";
 //Allows new user to create new account
 function createApplicant() {
 	if(isset($_POST["submit"])) {

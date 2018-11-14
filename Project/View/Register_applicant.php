@@ -2,7 +2,7 @@
 
 
 <?php
-include "View/Applicants.php";?>
+include "../Controller/Applicants.php";?>
 <?php
 createApplicant();
 ?>

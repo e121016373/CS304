@@ -1,7 +1,7 @@
 <?php
 	
 	if(isset($_POST["register"])) {
-		header("Location:register_applicant.php");
+		header("Location:Register_applicant.php");
 		exit;
 	}
 
