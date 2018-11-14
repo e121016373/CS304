@@ -1,5 +1,6 @@
-<?php include "../Controller/Employers.php";
-
+<?php 
+include "../Controller/Employers.php";
+include "../Controller/DB.php"
 ?>
 
 
@@ -58,8 +59,30 @@
 		<textarea id="education" type="text" name="education"></textarea>
 
 		<br>
+		<label for="company">Company</label>
+		<select id="company" name="company">
+			<?php
+			$query = "SELECT * FROM Company";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			while ($row = mysqli_fetch_assoc($result)) {
+				$id = $row['CompanyName'];
+				echo "<option value='$id'>$id</option>";
+			}
+
+			?>
+		</select>
+
+
 		<input type="submit" name="register">
 
 	</form>
+	<p> Didn't find your company? Create your own.</p>
+	<form action="Register_employer.php" method = post id=registration_form>
+		<input type="submit" name="createCompany" value="Create Company">
+	</form>
+
 </body>
 </html>
