@@ -1,21 +1,25 @@
 <?php
+include "DB.php";
+session_start();
 
 function login() {
-	if(isset($_POST["login"])) {
+	if(isset($_POST["submit"])) {
 		global $connection;
 		
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['Password']);
 		
-		$result = mysqli_query($connection, "SELECT Username, Name, SIN, from person where '$username'=Username and '$Password'=Password");
+		$result = mysqli_query($connection, "SELECT * from person WHERE '$username'=Username and '$password'=Password");
 		
 		if (!$result){
-			die("Login Fails" . mysqli_error($connection));
+			die("Login Fails " . mysqli_error($connection));
 		} else {
 			$_SESSION['username'] = $username;
-			$_SESSION['name'] = mysqli_query($connection, "SELECT Name from person where '$username'=Username");
-			$_SESSION['sin'] = mysqli_query($connection, "SELECT SIN from person where '$username'=Username");
-			echo "Welcome" . $username;
+			$row = mysqli_fetch_assoc($result);
+			$_SESSION['name'] = $row['Name'];
+			$_SESSION['sin'] = $row['SIN'];
+			echo "Welcome " . $username;
+			return true;
 		}
 	
 	}

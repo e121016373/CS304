@@ -42,7 +42,7 @@ function viewPostings() {
 	
 	if(isset($_POST["view"])) {
 
-		$query = 'SELECT * FROM postings';
+		$query = 'SELECT * FROM postedjob';
 
 		echo mysqli_query($connection, $query);
 	}
@@ -51,20 +51,14 @@ function viewPostings() {
 //Create applications
 function createApplication() {
 	if(isset($_POST["submit"])){
-	global $connection;
-	
-	//$connection = mysqli_connect('local', 'root', '', 'applications');
-	
-	if(!$connection) { 
-		die("Database connection fails"); 
-	}
 	
 	$jobid = mysqli_real_escape_string($connection, $_POST['job_id']);
 	$coverletter = mysqli_real_escape_string($connection, $_POST['cover_letter']);
 	$resume = mysqli_real_escape_string($connectio, $_POST['resume']);
+	$username = $_SESSION['username'];
 	
-	$query = 'INSERT INTO applications';
-	$query .= "VALUES ('$jobid', '$coverletter', '$resume')";
+	$query = 'INSERT INTO application';
+	$query .= "VALUES ('$username','$jobid', '$coverletter', '$resume')";
 	
 	$result = mysqli_query($connection, $query);
 	if (!$result) {
