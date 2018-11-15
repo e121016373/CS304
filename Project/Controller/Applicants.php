@@ -23,7 +23,6 @@ function createApplicant() {
 		$_SESSION['name'] = $name;
 		$_SESSION['sin'] = $sin;
 
-
 		$query = 'INSERT INTO person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education)';
 		$query .= "VALUES ('$sin','$password', '$username','$name','$contact_info','$physiological_info','$work_experience','$education')";
 		
@@ -139,7 +138,7 @@ function searchJob() {
 	} else {
 		echo $result;
 		}				
-	}s
+	}
 }
 
 ?>
