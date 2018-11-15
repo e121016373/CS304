@@ -17,7 +17,6 @@ session_start();
 	<form action = "Dashboard_applicant.php">
 		<button type = "submit" name = "view_job">View Job Postings</button>
 		<button type = "submit" name = "view_my_application">View My Application</button>
-		<button type = "submit" name = "view_my_reviews">View My Reviews</button>
 		<button type = "submit" name = "view_my_schedule">View My Schedule</button>
 		<button type = "submit" name = "view_my_connection">View My Connection</button>
 		<button type = "submit" name = "view_my_reviews">View My Reviews</button>
