@@ -243,5 +243,4 @@ function viewReview() {
 		echo "Error creating evaluation: ". mysqli_error($connection);
 	}
 }
-
 ?>
