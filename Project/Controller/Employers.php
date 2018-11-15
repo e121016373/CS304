@@ -1,6 +1,44 @@
 <?php include "DB.php";
 session_start();
 
+function createEmployer() {
+	global $connection;
+
+	if (!$connection) {
+		die('Failed to connect: ' . mysqli_error());
+	}
+
+	if(isset($_POST["register"])) {
+		global $connection;
+
+		$username = mysqli_real_escape_string($connection, $_POST['username']);
+		$password = mysqli_real_escape_string($connection, $_POST['Password']);
+		$sin = mysqli_real_escape_string($connection, $_POST['sin']);
+		$name = mysqli_real_escape_string($connection, $_POST['name']);
+		$contactinfo = mysqli_real_escape_string($connection, $_POST['contact_info']);
+		$physiologicalinfo = mysqli_real_escape_string($connection, $_POST['physiological_info']);
+		$workexperience = mysqli_real_escape_string($connection, $_POST['work_experience']);
+		$education = mysqli_real_escape_string($connection, $_POST['education']);
+		$company = mysqli_real_escape_string($connection, $_POST['company']);
+
+
+		$sql = "INSERT INTO person(Username, Password, SIN, Name, Contact_info, Physiological_Info, Work_Experience, Education, Company) VALUES ('$username', '$password', '$sin', '$name', '$contactinfo','$physiologicalinfo','$workexperience','$education', '$company')";
+		
+		
+		$result = mysqli_query($connection, $sql);
+		$result2 = mysqli_query($connection, "INSERT INTO employer(SIN, CompanyName) VALUES ('$sin', '$company')");
+		
+		if (!$result and !$result2) {
+			die("Query Failed" . mysqli_error($connection));
+		} else {
+			echo "Employer created successfully";
+		}
+	}
+}
+
+
+
+
 function registerCompany() {
 	global $connection;
 	if (!$connection) {
@@ -15,8 +53,13 @@ function registerCompany() {
 	}
 
 	if (isset($companyName) && isset($size) && isset($contactInfo) && isset($field)) {
+<<<<<<< HEAD
 		$sql = "INSERT INTO company (companyName, CompanySize, Contact_Info, Field)
 			VALUES ($companyName, $size, $contactInfo, $field)";
+=======
+		$sql = "INSERT INTO Company (companyName, size, contactInfo, field)
+			VALUES ('$companyName', '$size', '$contactInfo', '$field')";
+>>>>>>> 579f734ab84f55e0c9d480e9146bd6ea6d79d1e1
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -45,8 +88,13 @@ function createJobs() {
 	}
 
 	if (isset($jobID) && isset($requirement) && isset($description) && isset($location) && isset($type) && isset($salary) && isset($employerSIN)) {
+<<<<<<< HEAD
 		$sql = "INSERT INTO postedjob(jobID, requirement, description, location, type, salary, employerSIN)
 			VALUES ($jobID, $requirement, $description, $location, $type, $salary, $employerSIN)";
+=======
+		$sql = "INSERT INTO PostedJob (jobID, requirement, description, location, type, salary, employerSIN)
+			VALUES ('$jobID', '$requirement', '$description', '$location', '$type', '$salary', '$employerSIN')";
+>>>>>>> 579f734ab84f55e0c9d480e9146bd6ea6d79d1e1
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -109,7 +157,7 @@ function setEvaluation() {
 
 	if (isset($evaluationID) && isset($length) && isset($date) && isset($time) && isset($employerSIN) && isset($applicationID)) {
 		$sql = "INSERT INTO Evaulation (Evaulation ID, Length, EDate, ETime, Employer SIN, Application ID) 
-		VALUES ($evaluationID, $length, $date, $time, $employerSIN, $applicationID)";
+		VALUES ('$evaluationID', '$length', '$date', '$time', '$employerSIN', '$applicationID')";
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -136,7 +184,7 @@ function giveOffer() {
 
 	if (isset($offerID) && isset($salary) && isset($startDate)) {
 		$sql = "INSERT INTO Offer (Offer ID, Salary, StartDate)
-			VALUES ($offerID, $salary, $startDate)";
+			VALUES ('$offerID', '$salary', '$startDate')";
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -154,16 +202,21 @@ function viewReview() {
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
 	}
-
-	$sql = "CREATE VIEW companyReview AS 
-		SELECT *
-		FROM Review
-		WHERE ";
-
-	if (mysqli_query($connection, $sql)) {
-		echo "Record created successfully";
-	} else {
-		echo "Error creating evaluation: ". mysqli_error($connection);
-	}
+	if(isset($_POST['review'])) {
+		$companyName = mysqli_real_escape_string($connection, $_POST['CompanyName']);
+		$sql = "SELECT *
+			FROM Review
+			WHERE CompanyName = '$companyName'";
+		$result = mysqli_query($connection, $sql);
+		if (!$result) {
+			echo "Company not found";
+		} else if(mysqli_num_rows($result) <= 0) {
+			echo "Company has no review";
+		} else {
+			while ($row = mysqli_fetch_row($result)) {
+				echo $row[0] . $row[1] . $row[2] . $row[3];
+			}
+		}
+	}	
 }
 ?>
