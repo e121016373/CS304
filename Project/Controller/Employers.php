@@ -53,13 +53,8 @@ function registerCompany() {
 	}
 
 	if (isset($companyName) && isset($size) && isset($contactInfo) && isset($field)) {
-<<<<<<< HEAD
-		$sql = "INSERT INTO company (companyName, CompanySize, Contact_Info, Field)
-			VALUES ($companyName, $size, $contactInfo, $field)";
-=======
 		$sql = "INSERT INTO Company (companyName, size, contactInfo, field)
 			VALUES ('$companyName', '$size', '$contactInfo', '$field')";
->>>>>>> 579f734ab84f55e0c9d480e9146bd6ea6d79d1e1
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -88,13 +83,8 @@ function createJobs() {
 	}
 
 	if (isset($jobID) && isset($requirement) && isset($description) && isset($location) && isset($type) && isset($salary) && isset($employerSIN)) {
-<<<<<<< HEAD
-		$sql = "INSERT INTO postedjob(jobID, requirement, description, location, type, salary, employerSIN)
-			VALUES ($jobID, $requirement, $description, $location, $type, $salary, $employerSIN)";
-=======
 		$sql = "INSERT INTO PostedJob (jobID, requirement, description, location, type, salary, employerSIN)
 			VALUES ('$jobID', '$requirement', '$description', '$location', '$type', '$salary', '$employerSIN')";
->>>>>>> 579f734ab84f55e0c9d480e9146bd6ea6d79d1e1
 	} else {
 		echo 'Must enter all fields';
 	}
