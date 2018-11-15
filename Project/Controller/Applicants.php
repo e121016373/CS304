@@ -1,4 +1,6 @@
 <?php include "DB.php";
+session_start();
+
 //Allows new user to create new account
 function createApplicant() {
 	if(isset($_POST["register"])) {
@@ -14,10 +16,14 @@ function createApplicant() {
 		$education = mysqli_real_escape_string($connection, $_POST['education']);
 		$industry = mysqli_real_escape_string($connection, $_POST['industry']);
 
+		$_SESSION['username'] = $username;
+		$_SESSION['name'] = $name;
+		$_SESSION['sin'] = $sin;
+
 
 		$query = 'INSERT INTO person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education)';
 		$query .= "VALUES ('$sin','$password', '$username','$name','$contact_info','$physiological_info','$work_experience','$education')";
-				
+		
 		$result = mysqli_query($connection, $query);
 		$result2 = mysqli_query($connection, "INSERT INTO applicant(SIN, Industry) VALUES ('$sin', '$industry')");
 		
@@ -25,6 +31,7 @@ function createApplicant() {
 			die("Query Failed" . mysqli_error($connection));
 		} else {
 			echo "Record Created";
+			return true;
 		}
 	}
 }
@@ -32,11 +39,6 @@ function createApplicant() {
 //Allows applicants to view all available postings
 function viewPostings() {
 	global $connection;
-	//$connection = mysqli_connect('localhost', 'root', '', 'postings');
-
-	if(!$connection) {
-		die("Database connection fails");
-		}
 	
 	if(isset($_POST["view"])) {
 

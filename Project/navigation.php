@@ -1,10 +1,10 @@
 <?php
 	
-	if(isset($_POST["employer"])) {
+	if(isset($_GET["employer"])) {
 		header("Location:View/Login_employer.php");
 		exit;
 	}
-	if(isset($_POST["applicant"])) {
+	if(isset($_GET["applicant"])) {
 		header("Location:View/Login_applicant.php");
 		exit;
 	}
@@ -17,7 +17,7 @@
 	<title>navigation</title>
 </head>
 <body>
-	<form action = "navigation.php" method = "post">
+	<form action = "navigation.php">
 		<input type="submit" name = "applicant" value = "applicant">
 		</input>
 		<input type="submit" name = "employer" value = "employer"></input>
