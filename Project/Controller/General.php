@@ -15,8 +15,9 @@ function login() {
 			die("Login Fails " . mysqli_error($connection));
 		} else {
 			$_SESSION['username'] = $username;
-			$_SESSION['name'] = mysqli_query($connection, "SELECT Name from person where '$username'=Username");
-			$_SESSION['sin'] = mysqli_query($connection, "SELECT SIN from person where '$username'=Username");
+			$row = mysqli_fetch_assoc($result);
+			$_SESSION['name'] = $row['Name'];
+			$_SESSION['sin'] = $row['SIN'];
 			echo "Welcome " . $username;
 			return true;
 		}
