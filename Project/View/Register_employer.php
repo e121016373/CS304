@@ -33,13 +33,6 @@ include "../Controller/DB.php"
 
 		<br>
 
-		<label for="name">Name</label>
-		<input id="name" type="text" name="name" required>
-
-		<br>
-
-
-
 		<label for="contact_info">Contact Information</label>
 		<input id="contact_info" type="text" name="contact_info"required>
 
