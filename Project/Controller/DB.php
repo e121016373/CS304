@@ -1,18 +1,18 @@
 <?php
 
 
-/* $connection = mysqli_connect('localhost', 'root', '', 'projectDB');
+$connection = mysqli_connect('localhost', 'root', '', 'projectDB');
 
 if(!$connection) {
 	die("Database connection fails");
 }
- */
 
 
 
-$user = 'root';
+
+/* $user = 'root';
 $password = '';
-$db = 'projectdb';
+$db = 'projectDB';
 $host = 'localhost';
 $port = 3306;
 
@@ -29,6 +29,6 @@ $success = mysqli_real_connect(
 if(!$success) {
 	die("Database connection fails");
 }
-
+ */
 
 ?>

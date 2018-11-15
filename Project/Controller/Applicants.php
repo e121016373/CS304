@@ -12,10 +12,10 @@ function createApplicant() {
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['Password']);
 		$sin = mysqli_real_escape_string($connection, $_POST['sin']);
-		$contactinfo = mysqli_real_escape_string($connection, $_POST['contact_info']);
+		$contact_info = mysqli_real_escape_string($connection, $_POST['contact_info']);
 		$name = mysqli_real_escape_string($connection, $_POST['name']);
-		$physiologicalinfo = mysqli_real_escape_string($connection, $_POST['physiological_info']);
-		$workexperience = mysqli_real_escape_string($connection, $_POST['work_experience']);
+		$physiological_info = mysqli_real_escape_string($connection, $_POST['physiological_info']);
+		$work_experience = mysqli_real_escape_string($connection, $_POST['work_experience']);
 		$education = mysqli_real_escape_string($connection, $_POST['education']);
 		$industry = mysqli_real_escape_string($connection, $_POST['industry']);
 
@@ -23,7 +23,7 @@ function createApplicant() {
 		$_SESSION['name'] = $name;
 		$_SESSION['sin'] = $sin;
 
-		$query = 'INSERT INTO person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education)';
+		$query = 'INSERT INTO Person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education)';
 		$query .= "VALUES ('$sin','$password', '$username','$name','$contact_info','$physiological_info','$work_experience','$education')";
 		
 		$result = mysqli_query($connection, $query);

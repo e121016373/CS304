@@ -14,6 +14,7 @@ function login() {
 		if (!$result){
 			die("Login Fails " . mysqli_error($connection));
 		} else {
+			
 			$_SESSION['username'] = $username;
 			$row = mysqli_fetch_assoc($result);
 			$_SESSION['name'] = $row['Name'];
