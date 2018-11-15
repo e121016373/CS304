@@ -1,9 +1,8 @@
-
 <?php include "DB.php";
+session_start();
 
 function registerCompany() {
 	global $connection;
-
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
 	}
@@ -16,7 +15,7 @@ function registerCompany() {
 	}
 
 	if (isset($companyName) && isset($size) && isset($contactInfo) && isset($field)) {
-		$sql = "INSERT INTO Company (companyName, size, contactInfo, field)
+		$sql = "INSERT INTO company (companyName, CompanySize, Contact_Info, Field)
 			VALUES ($companyName, $size, $contactInfo, $field)";
 	} else {
 		echo 'Must enter all fields';
@@ -31,7 +30,6 @@ function registerCompany() {
 
 function createJobs() {
 	global $connection;
-
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
 	}
@@ -47,7 +45,7 @@ function createJobs() {
 	}
 
 	if (isset($jobID) && isset($requirement) && isset($description) && isset($location) && isset($type) && isset($salary) && isset($employerSIN)) {
-		$sql = "INSERT INTO PostedJob (jobID, requirement, description, location, type, salary, employerSIN)
+		$sql = "INSERT INTO postedjob(jobID, requirement, description, location, type, salary, employerSIN)
 			VALUES ($jobID, $requirement, $description, $location, $type, $salary, $employerSIN)";
 	} else {
 		echo 'Must enter all fields';

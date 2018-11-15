@@ -17,7 +17,6 @@ function login() {
 			$_SESSION['username'] = $username;
 			$_SESSION['name'] = mysqli_query($connection, "SELECT Name from person where '$username'=Username");
 			$_SESSION['sin'] = mysqli_query($connection, "SELECT SIN from person where '$username'=Username");
-			echo "Welcome " . $username;
 			return true;
 		}
 	

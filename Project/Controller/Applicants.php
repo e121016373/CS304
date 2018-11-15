@@ -5,6 +5,9 @@ session_start();
 function createApplicant() {
 	if(isset($_POST["register"])) {
 		global $connection;
+		if(!$connection) {
+			die("Database connection fails");
+		}
 
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['Password']);
@@ -39,6 +42,9 @@ function createApplicant() {
 //Allows applicants to view all available postings
 function viewPostings() {
 	global $connection;
+	if(!$connection) {
+		die("Database connection fails");
+	}
 	
 	if(isset($_POST["view"])) {
 
@@ -51,6 +57,10 @@ function viewPostings() {
 //Create applications
 function createApplication() {
 	if(isset($_POST["submit"])){
+	global $connection;
+	if(!$connection) {
+		die("Database connection fails");
+	}
 	
 	$jobid = mysqli_real_escape_string($connection, $_POST['job_id']);
 	$coverletter = mysqli_real_escape_string($connection, $_POST['cover_letter']);
@@ -62,9 +72,9 @@ function createApplication() {
 	
 	$result = mysqli_query($connection, $query);
 	if (!$result) {
-		die("Application failed" . mysqli_error($connection));
+		die("Application failed. " . mysqli_error($connection));
 	} else {
-		echo "Application submitted";
+		echo "Application submitted.";
 	}
 	}
 }
@@ -73,15 +83,16 @@ function createApplication() {
 function viewOffers() {
 	if(isset($_POST["submit"])){
 		global $connection;
-		//$connection = mysqli_connect('local', 'root', '', 'offers');
-		
-		if (!$connection) {
+		if(!$connection) {
 			die("Database connection fails");
-		}
+			}
+	
+		$sin = $_SESSION['sin'];
 		
-		$query = 'SELECT * from offers';
-		
-		$result = mysqli_query($connection, $query);
+		$applications = mysqli_query($connection, "SELECT ApplicationID FROM application WHERE Applicant_SIN='$sin'");
+		$evaluation = mysqli_query($connection, "SELECT EvaluationID FROM evaluation WHERE ApplicationID IN '$applications'");
+		$result = mysqli_query($connection, "SELECT * FROM offer WHERE EvaluationID IN '$evaluation'");
+
 		echo $result; 
 		
 	}
@@ -90,23 +101,45 @@ function viewOffers() {
 //Allows applicant to view the evaluation time for the for evaluations
 function viewEvalTime() {
 	if(isset($_POST["search"])) {
-		global $sin;
 		global $connection;
-		
-		if (!$connection_eval or !connection_app) {
+		if(!$connection) {
 			die("Database connection fails");
-		}
+			}
 		
-		$application = mysqli_query($connection, 'SELECT application_ID from applications WHERE applications.applicant_username = sin');
-		$query = 'SELECT * FROM evaluation WHERE evaluation.application_ID = $application.application_ID';
+		$sin = $_SESSION['sin'];
 		
-		echo mysqli_query($connection, $query);
-		
+		$applications = mysqli_query($connection, "SELECT ApplicationID FROM application WHERE Applicant_SIN='$sin'");
+		$evaluation = mysqli_query($connection, "SELECT EvaluationID FROM evaluation WHERE ApplicationID IN '$applications'");
+			
+		echo $evaluation;
 		
 	}
 }
-//TODO:
-function searchJob() {}
+//Allows applicant to search job that matches his criteria
+function searchJob() {
+	if(isset($_POST["search"])) {
+		global $connection;
+		if(!$connection) {
+			die("Database connection fails");
+		}
+		
+		$companyName = mysqli_real_escape_string($connection, $_POST['companyName']);
+		$location = mysqli_real_escape_string($connection, $_POST['location']);
+		$type = mysqli_real_escape_string($connection, $_POST['type']);
+		$salary = mysqli_real_escape_string($connection, $_POST['salary']);
+		
+		
+		$query = "SELECT * FROM postedjob";
+		$query .= "WHERE CompanyName='%$companyName%' AND Location='%$location%' AND Type='%$type%' AND Salary='%$salary%'";
+		
+		$result = mysqli_query($connection, $query);
+		
+	if (!$result) {
+		die("Search failed. " . mysqli_error($connection));
+	} else {
+		echo $result;
+		}				
+	}s
+}
 
-//Don't need to autmoatically generate ID
 ?>
