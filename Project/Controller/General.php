@@ -19,10 +19,24 @@ function login() {
 		}
 	
 	}
-
-
 }
 
+function sendRequest() {
+	if(isset($_POST["send"])) {
+		global $connection;
 
+		$username = mysqli_real_escape_string($connection, $_POST['username']);
+
+		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
+		if (!$result) {
+			die("User not found: " . mysqli_error($connection));
+		} else {
+			$_SESSION['username'] = $username;
+			$sql = "INSERT INTO Request(Username) VALUES('$username')";
+			mysqli_query($connection, $sql);
+			echo "Request sent.";
+		}
+	}
+}
 
 ?>

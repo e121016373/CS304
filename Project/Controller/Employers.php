@@ -1,43 +1,6 @@
 
 <?php include "DB.php";
 
-function loginEmployer() {
-	global $connection;
-
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
-
-	if(isset($_POST["submit"])) {
-		$username = mysqli_real_escape_string($connection, $_POST['username']);
-		$password = mysqli_real_escape_string($connection, $_POST['password']);
-	}
-
-	if (isset($username) && isset($password) {
-		if ($this->checkEmployerDB($username, $password)) {
-			session_start();
-			$_SESSION[$this->GetLoginSessionVar()] = $username;
-		}
-	} else {
-		echo 'Must enter all fields';
-	}
-}
-
-function checkEmployerDB($username, $password) {
-	if(!$this->DBLogin()) {
-		$this->HandleError("Database login failed.");
-		return false;
-	}
-	$sql = "SELECT Username, Password 
-		FROM Person
-		WHERE Username = $username AND Password = $password";
-	$result = mysqli_query($connection, $sql);
-	if (!$result || mysqli_num_rows($result) <= 0) {
-		echo "The username or password does not match";
-		return false;
-	} else return true;
-}
-
 function createEmployer() {
 	global $connection;
 
@@ -92,7 +55,7 @@ function registerCompany() {
 
 	if (isset($companyName) && isset($size) && isset($contactInfo) && isset($field)) {
 		$sql = "INSERT INTO Company (companyName, size, contactInfo, field)
-			VALUES ($companyName, $size, $contactInfo, $field)";
+			VALUES ('$companyName', '$size', '$contactInfo', '$field')";
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -123,7 +86,7 @@ function createJobs() {
 
 	if (isset($jobID) && isset($requirement) && isset($description) && isset($location) && isset($type) && isset($salary) && isset($employerSIN)) {
 		$sql = "INSERT INTO PostedJob (jobID, requirement, description, location, type, salary, employerSIN)
-			VALUES ($jobID, $requirement, $description, $location, $type, $salary, $employerSIN)";
+			VALUES ('$jobID', '$requirement', '$description', '$location', '$type', '$salary', '$employerSIN')";
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -186,7 +149,7 @@ function setEvaluation() {
 
 	if (isset($evaluationID) && isset($length) && isset($date) && isset($time) && isset($employerSIN) && isset($applicationID)) {
 		$sql = "INSERT INTO Evaulation (Evaulation ID, Length, EDate, ETime, Employer SIN, Application ID) 
-		VALUES ($evaluationID, $length, $date, $time, $employerSIN, $applicationID)";
+		VALUES ('$evaluationID', '$length', '$date', '$time', '$employerSIN', '$applicationID')";
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -213,7 +176,7 @@ function giveOffer() {
 
 	if (isset($offerID) && isset($salary) && isset($startDate)) {
 		$sql = "INSERT INTO Offer (Offer ID, Salary, StartDate)
-			VALUES ($offerID, $salary, $startDate)";
+			VALUES ('$offerID', '$salary', '$startDate')";
 	} else {
 		echo 'Must enter all fields';
 	}
@@ -231,16 +194,21 @@ function viewReview() {
 	if (!$connection) {
 		die('Failed to connect: ' . mysqli_error());
 	}
-
-	$sql = "CREATE VIEW companyReview AS 
-		SELECT *
-		FROM Review
-		WHERE CompanyName = company_name";
-
-	if (mysqli_query($connection, $sql)) {
-		echo "Record created successfully";
-	} else {
-		echo "Error creating evaluation: ". mysqli_error($connection);
-	}
+	if(isset($_POST['review'])) {
+		$companyName = mysqli_real_escape_string($connection, $_POST['CompanyName']);
+		$sql = "SELECT *
+			FROM Review
+			WHERE CompanyName = '$companyName'";
+		$result = mysqli_query($connection, $sql);
+		if (!$result) {
+			echo "Company not found";
+		} else if(mysqli_num_rows($result) <= 0) {
+			echo "Company has no review";
+		} else {
+			while ($row = mysqli_fetch_row($result)) {
+				echo $row[0] . $row[1] . $row[2] . $row[3];
+			}
+		}
+	}	
 }
 ?>
