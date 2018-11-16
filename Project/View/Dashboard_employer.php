@@ -15,7 +15,7 @@ session_start();
 		
 	</h1>
 	<form action = "Dashboard_employer.php">
-		<button type = "submit" name = "view_my_job_postings">View Job Postings</button>
+		<button type = "submit" name = "view_my_job_postings">View My Job Postings</button>
 		<button type = "submit" name = "view_my_schedule">View My Schedule</button>
 		<button type = "submit" name = "view_my_connection">View My Connection</button>
 		<button type = "submit" name = "view_my_reviews">View My Reviews</button>
@@ -24,12 +24,12 @@ session_start();
 	<?php
 	if(isset($_GET['view_my_job_postings'])) {
 		$query = "SELECT * FROM postedjob ";
-		$query .= "WHERE Employer_SIN = " . "\"$_SESSION['name']\"";
+		$query .= "WHERE Employer_SIN = \"" . $_SESSION['sin'] . "\"";
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
-		echo "<form action =\"apply_job.php\" method =\"post\">";
+		echo "<form action =\"modify_job.php\" method =\"post\">";
 		echo "<table>"; // start a table tag in the HTML
 		echo "<tr><td>" . "JobID" . "</td><td>" . 'CompanyName' . "</td><td>" . 'Requirements' . "</td><td>" . 'Description' . "</td><td>" . 'Location' . "</td><td>" . 'Type' . "</td><td>" . 'Salary' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
@@ -37,8 +37,10 @@ session_start();
 			echo "<td><button type = \"submit\" name = \"modify_job\" value = ". $row['JobID'] . ">Modify</button></td></td>"; 
 			echo "<td><button type = \"submit\" name = \"modify_job\" value = ". $row['JobID'] . ">Delete</button></td></tr>"; 
 		}
-		echo "</table>"; //Close the table in HTML
-		echo "<button type = \"submit\" name = \"post_new_job\" value = ". $row['JobID'] . ">Post a New Job</button>"; 
+		echo "</table>"; //Close the table in HTML 
+		echo "</form>";
+		echo "<form action =\"post_job.php\" method =\"post\">";
+		echo "<button type = \"submit\" name = \"post_new_job\" value = ". $row['JobID'] . ">Post a New Job</button>";
 		echo "</form>";
 	}
 	if (isset($_GET["view_my_schedule"])) {
