@@ -11,6 +11,7 @@ function login() {
 		
 		$result = mysqli_query($connection, "SELECT * from person WHERE '$username'=Username and '$password'=Password");
 		
+		
 		if (!$result){
 			die("Login Fails " . mysqli_error($connection));
 		} else {
@@ -19,7 +20,14 @@ function login() {
 			$row = mysqli_fetch_assoc($result);
 			$_SESSION['name'] = $row['Name'];
 			$_SESSION['sin'] = $row['SIN'];
-			return true;
+			
+			$role = 'employer'; 
+			$sin = $row['SIN'];
+			if (mysqli_num_rows(mysqli_query($connection, "SELECT * from applicant WHERE SIN='$sin'")) != 0){
+					$role = 'applicant';
+			}
+			return $role;
+			
 		}
 	
 	}
