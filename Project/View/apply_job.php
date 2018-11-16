@@ -1,3 +1,11 @@
+<?php
+include "../Controller/Applicants.php";
+
+	if(isset($_POST["submit"])) {
+		if(createrApplication()) header("Location:Dashboard_applicant.php");
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
