@@ -65,7 +65,7 @@ session_start();
 			die("Query Failed" . mysqli_error($connection));
 		}
 		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . "Phone Interview" . "</td><td>" . $row['PhoneNumber'] . "</td></tr>";
+			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . "Phone Interview" . "</td><td>" . $row['PhoneNumber'] . "</td></tr>";
 		}
 
 		$query = "SELECT * FROM evaluation NATURAL JOIN examinterview NATURAL JOIN application NATURAL JOIN postedjob";
@@ -74,7 +74,7 @@ session_start();
 			die("Query Failed" . mysqli_error($connection));
 		}
 		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . "Exam Interview" . "</td><td>" . $row['Location'] . "</td></tr>";
+			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . "Exam Interview" . "</td><td>" . $row['Location'] . "</td></tr>";
 		}
 		echo "</table>"; //Close the table in HTML
 		echo "</form>";
