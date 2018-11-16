@@ -2,7 +2,7 @@
 include "../Controller/Applicants.php";
 
 	if(isset($_POST["submit"])) {
-		if(createrApplication()) header("Location:Dashboard_applicant.php");
+		if(createApplication()) header("Location:Dashboard_applicant.php");
 	}
 
 ?>
@@ -15,7 +15,12 @@ include "../Controller/Applicants.php";
 	<?php 
 	echo "<h1> You are going to apply Job with Job ID". $_POST["apply_job"] . "</h1>" ;
 	?>
-	<form action="Dashboard_applicant.php" method="post">
+	<form action="apply_job.php" method="post">
+		<label for="job_ID">Job ID</label>
+		<textarea id="job_ID" type="text" name="job_ID"></textarea>
+		
+		<br>
+	
 		<label for="cover_letter">Cover Letter</label>
 		<textarea id="cover_letter" type="text" name="cover_letter"></textarea>
 

@@ -61,9 +61,9 @@ function createApplication() {
 		die("Database connection fails");
 	}
 	
-	$jobid = mysqli_real_escape_string($connection, $_POST['apply_job']);
+	$jobid = mysqli_real_escape_string($connection, $_POST['job_ID']);
 	$coverletter = mysqli_real_escape_string($connection, $_POST['cover_letter']);
-	$resume = mysqli_real_escape_string($connectio, $_POST['resume']);
+	$resume = mysqli_real_escape_string($connection, $_POST['resume']);
 	$sin = $_SESSION['sin'];
 	$applicationID = rand(0, 10000);
 	
