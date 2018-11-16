@@ -5,6 +5,12 @@
 		exit;
 	}
 
+include "../Controller/General.php";
+
+	if(isset($_POST["submit"])) {
+		if(login()) header("Location:Dashboard_employer.php");
+	}
+
 ?>
 
 
