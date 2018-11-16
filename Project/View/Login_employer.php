@@ -9,6 +9,7 @@ include "../Controller/General.php";
 
 	if(isset($_POST["submit"])) {
 		if(login()) header("Location:Dashboard_employer.php");
+		exit();
 	}
 
 ?>
@@ -29,7 +30,7 @@ include "../Controller/General.php";
 
 		<div>
 			<label for="password">Password</label>
-			<input type="password" name = "password" class = "form-control">
+			<input type="password" name = "Password" class = "form-control">
 		</div>
 
 		<input type="submit" name="register" value = "register"></input> 
