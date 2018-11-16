@@ -3,6 +3,13 @@ include "../Controller/Employers.php";
 include "../Controller/DB.php"
 ?>
 
+<?php
+if(isset($_POST["createCompany"])) {
+	header("Location: Create_company.php");
+	exit();
+}
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +18,7 @@ include "../Controller/DB.php"
 </head>
 <body>
 	<h1>Register</h1>
-	<form action="Register_employer.php" method = post id=registration_form>
+	<form action="Register_employer.php" method = "post" id=registration_form>
 
 		<label for="username">Username</label>
 		<input id="username" type="text" name="username" required>
@@ -73,7 +80,7 @@ include "../Controller/DB.php"
 
 	</form>
 	<p> Didn't find your company? Create your own.</p>
-	<form action="Register_employer.php" method = post id=registration_form>
+	<form action="Register_employer.php" method = "post" id=registration_form>
 		<input type="submit" name="createCompany" value="Create Company">
 	</form>
 
