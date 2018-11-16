@@ -4,10 +4,7 @@ include "../Controller/DB.php"
 ?>
 
 <?php
-if(isset($_POST["createCompany"])) {
-	header("Location: Create_company.php");
-	exit();
-}
+if(createEmployer()) header("Location:Dashboard_employer.php");
 ?>
 
 
@@ -51,7 +48,7 @@ if(isset($_POST["createCompany"])) {
 		<br>
 
 		<label for="work_experience">Work Experience</label>
-		<textarea id="work_experience" type="text" name="contact_info"></textarea>
+		<textarea id="work_experience" type="text" name="work_experience"></textarea>
 
 		<br>
 
