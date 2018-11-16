@@ -45,26 +45,27 @@ function sendRequest() {
 }
 
 // TODO
-// function acceptRequest() {
-// 	if(isset($_POST["accept"])) {
-// 		global $connection;
-// 		$senderQuery = "SELECT Sender FROM Person WHERE '$_SESSION['username'] = Receiver"
+/*
+function acceptRequest() {
+	if(isset($_POST["accept"])) {
+		global $connection;
+		$senderQuery = "SELECT Sender FROM Person WHERE '$_SESSION['username'] = Receiver"
 		
 
-// 		$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES ('$_SESSION['sin']', '$connectionSIN')";
+		$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES ('$_SESSION['sin']', '$connectionSIN')";
 
 
-// 		$connectionSIN = $_SESSION[''];
+		$connectionSIN = $_SESSION[''];
 
-// 		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
-// 		if (!$result) {
-// 			die("User not found: " . mysqli_error($connection));
-// 		} else {
-// 			$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES('$username')";
-// 			mysqli_query($connection, $sql);
-// 			echo "Request accepted.";
-// 		}
-// 	}
-// }
-
+		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
+		if (!$result) {
+			die("User not found: " . mysqli_error($connection));
+		} else {
+			$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES('$username')";
+			mysqli_query($connection, $sql);
+			echo "Request accepted.";
+		}
+	}
+}
+*/
 ?>

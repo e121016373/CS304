@@ -1,15 +1,13 @@
 <?php include "DB.php";
 session_start();
 
+// debugged
 function createEmployer() {
-	global $connection;
-
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
-
 	if(isset($_POST["register"])) {
 		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['Password']);
@@ -21,22 +19,26 @@ function createEmployer() {
 		$education = mysqli_real_escape_string($connection, $_POST['education']);
 		$company = mysqli_real_escape_string($connection, $_POST['company']);
 
+		if(isset($username) && isset($name) && isset($sin)) {
+			$_SESSION['username'] = $username;
+			$_SESSION['name'] = $name;
+			$_SESSION['sin'] = $sin;
+		}
 
-		$sql = "INSERT INTO person(Username, Password, SIN, Name, Contact_info, Physiological_Info, Work_Experience, Education, Company) VALUES ('$username', '$password', '$sin', '$name', '$contactinfo','$physiologicalinfo','$workexperience','$education', '$company')";
+		$sql = "INSERT INTO person(SIN, Password, Username, Name, Contact_info, Physiological_Info, Work_Experience, Education) VALUES ('$sin', '$password', '$username', '$name', '$contactinfo','$physiologicalinfo','$workexperience','$education')";
 		
 		
 		$result = mysqli_query($connection, $sql);
 		$result2 = mysqli_query($connection, "INSERT INTO employer(SIN, CompanyName) VALUES ('$sin', '$company')");
-		
-		if (!$result and !$result2) {
-			die("Query Failed" . mysqli_error($connection));
-		} else {
+	
+		if ($result and $result2) {
 			echo "Employer created successfully";
+			return true;
+		} else {
+			die("Query Failed: " . mysqli_error($connection));
 		}
 	}
 }
-
-
 
 
 function registerCompany() {
@@ -209,4 +211,5 @@ function viewReview() {
 		}
 	}	
 }
+
 ?>

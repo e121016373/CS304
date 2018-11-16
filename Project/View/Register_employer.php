@@ -3,6 +3,10 @@ include "../Controller/Employers.php";
 include "../Controller/DB.php"
 ?>
 
+<?php
+if(createEmployer()) header("Location:Dashboard_employer.php");
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +48,7 @@ include "../Controller/DB.php"
 		<br>
 
 		<label for="work_experience">Work Experience</label>
-		<textarea id="work_experience" type="text" name="contact_info"></textarea>
+		<textarea id="work_experience" type="text" name="work_experience"></textarea>
 
 		<br>
 
