@@ -61,19 +61,20 @@ function createApplication() {
 		die("Database connection fails");
 	}
 	
-	$jobid = mysqli_real_escape_string($connection, $_POST['job_id']);
+	$jobid = mysqli_real_escape_string($connection, $_POST['job_ID']);
 	$coverletter = mysqli_real_escape_string($connection, $_POST['cover_letter']);
-	$resume = mysqli_real_escape_string($connectio, $_POST['resume']);
-	$username = $_SESSION['username'];
+	$resume = mysqli_real_escape_string($connection, $_POST['resume']);
+	$sin = $_SESSION['sin'];
+	$applicationID = rand(0, 10000);
 	
-	$query = 'INSERT INTO application';
-	$query .= "VALUES ('$username','$jobid', '$coverletter', '$resume')";
+	$query = 'INSERT INTO application(ApplicationID, Applicant_SIN, JobID, CoverLetter, Resume)';
+	$query .= "VALUES ('$applicationID', '$sin','$jobid', '$coverletter', '$resume')";
 	
 	$result = mysqli_query($connection, $query);
 	if (!$result) {
 		die("Application failed. " . mysqli_error($connection));
 	} else {
-		echo "Application submitted.";
+		return true;
 	}
 	}
 }

@@ -46,13 +46,19 @@ session_start();
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
-		echo "<form action =\"cancel_application.php\" method =\"post\">";
+		echo "<form action =\"Dashboard_applicant.php\" method =\"post\">";
 		echo "<table>"; // start a table tag in the HTML
 		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Employer Cantact_info' . "</td><td>" . 'Status' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . "Null" . "</td>";
 			echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>"; 
+			//$_POST["cancel_job"] // has value of ApplicationID
 		}
+		if(isset($_POST['cancel_job'])){
+			$applicationID = $_POST["cancel_job"];
+			$sin = $_SESSION['sin'];
+			mysqli_query($connection, "DROP FROM application WHERE ApplicationID='$applicationID' and Applicant_SIN='$sin'");
+			}
 		echo "</table>"; //Close the table in HTML
 		echo "</form>";
 	}
