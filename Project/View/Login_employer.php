@@ -2,14 +2,16 @@
 	
 	if(isset($_POST["register"])) {
 		header("Location: Register_employer.php");
-		exit;
+		exit();
 	}
 
 include "../Controller/General.php";
 
 	if(isset($_POST["submit"])) {
-		if(login()) header("Location:Dashboard_employer.php");
-		exit();
+		if(login()) {
+			header("Location:Dashboard_employer.php");
+			exit();
+		}
 	}
 
 ?>

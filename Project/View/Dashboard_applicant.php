@@ -63,13 +63,13 @@ session_start();
 			die("Query Failed" . mysqli_error($connection));
 		}
 		echo "<table>"; // start a table tag in the HTML
-		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>";
+		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Location' . "</td></tr>";
 		$row = mysqli_fetch_assoc($result);
 		//if (isset($row))
 		echo 'Type' . "</td><td>" . 'Date' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['ApplicationID'] . "</td><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . "Null" . "</td>";
-			echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>"; 
+			echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>";
 		}
 		echo "</table>"; //Close the table in HTML
 		echo "</form>";
