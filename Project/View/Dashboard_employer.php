@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dashboard_applicant</title>
+	<title>Dashboard Employer</title>
 </head>
 <body>
 	<h1>
@@ -14,8 +14,8 @@ session_start();
 		?>
 		
 	</h1>
-	<form action = "Dashboard_applicant.php">
-		<button type = "submit" name = "view_job">View Job Postings</button>
+	<form action = "Dashboard_employer.php">
+		<button type = "submit" name = "view_my_job">View Job Postings</button>
 		<button type = "submit" name = "view_my_application">View My Application</button>
 		<button type = "submit" name = "view_my_schedule">View My Schedule</button>
 		<button type = "submit" name = "view_my_connection">View My Connection</button>
@@ -76,6 +76,7 @@ session_start();
 	}
 
 	?>
+
 
 </body>
 </html>
