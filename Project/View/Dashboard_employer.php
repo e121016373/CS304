@@ -30,7 +30,7 @@ if(deleteJob()) {
 	<?php
 	if(isset($_GET['view_my_job_postings'])) {
 		$query = "SELECT * FROM postedjob ";
-		$query .= "WHERE Employer_SIN = \"" . $_SESSION['sin'] . "\"";
+		$query .= "WHERE Employer_SIN = ".$_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
@@ -50,22 +50,18 @@ if(deleteJob()) {
 		echo "</form>";
 	}
 	if (isset($_GET["view_my_schedule"])) {
-		$query = "SELECT * FROM evaluation NATURAL JOIN application NATURAL JOIN postedjob";
+		echo "<table>"; // start a table tag in the HTML
+		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Applicant' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Form' . "</td></tr>";
+		$query = "SELECT * FROM interview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person ";
+		$query .= " WHERE Employer_SIN = " . $_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
-		echo "<table>"; // start a table tag in the HTML
-		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>";
-		$row = mysqli_fetch_assoc($result);
-		//if (isset($row))
-		echo 'Type' . "</td><td>" . 'Date' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['ApplicationID'] . "</td><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . "Null" . "</td>";
-			echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>"; 
+			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Form'] . "</td></tr>";
 		}
-		echo "</table>"; //Close the table in HTML
-		echo "</form>";
+		echo "</table>";
 	}
 
 	?>

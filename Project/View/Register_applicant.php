@@ -1,9 +1,11 @@
-<!-- Username, Password, SIN, Contact info, Name, Physiological info, Work Experience, Education, industry. -->
-
 
 <?php
-include "../Controller/Applicants.php";
-?>
+
+include "../Controller/Applicants.php";?>
+
+<link rel="stylesheet" type="text/css" href="template.css"/>
+
+
 
 <?php
 if(createApplicant()) header("Location:Dashboard_applicant.php");
@@ -15,7 +17,7 @@ if(createApplicant()) header("Location:Dashboard_applicant.php");
 <head>
 	<title>Register Applicant</title>
 </head>
-<body>
+<body background="back.jpg">
 	<h1>Register</h1>
 	<form action="Register_applicant.php" method = post id=registration_form>
 
@@ -30,7 +32,7 @@ if(createApplicant()) header("Location:Dashboard_applicant.php");
 		<br>
 
 		<label for="sin">SIN</label>
-		<input id="sin" type="number" name="sin" size="8" required>
+		<input id="sin" type="number" name="sin" size="8" maxlength="8" required>
 
 		<br>
 
@@ -66,7 +68,7 @@ if(createApplicant()) header("Location:Dashboard_applicant.php");
 
 		<br>
 		
-		<input type="submit" name="register">
+		<input type="submit" name="register" style="background-color:tomato;font-size: 15px;border-radius: 12px">
 
 	</form>
 
