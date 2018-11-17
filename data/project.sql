@@ -24,7 +24,7 @@ drop table if exists Company;
 create table Company
 	(CompanyName varchar(50) not null PRIMARY KEY, 
     CompanySize int not null,
-    Contact_Info varchar(100) not null,
+    Company_Info varchar(300) not null,
 	Field varchar(30) not null);
 
 
@@ -43,7 +43,11 @@ create table Applicant
 	(SIN int not null PRIMARY KEY,
 	Industry char(100) null,
     FOREIGN KEY (SIN) REFERENCES Person(SIN));
-	
+
+drop table if exists Request;
+create table Request
+	(Sender_Username varchar(30) not null PRIMARY KEY,
+	Receiver_Username varchar(30) not null);
 
 drop table if exists Employer;
 create table Employer
@@ -87,10 +91,10 @@ create table Evaluation
     FOREIGN KEY (Employer_SIN) REFERENCES Person(SIN),
     FOREIGN key (ApplicationID) REFERENCES Application(ApplicationID));
 
-drop table if exists OnlineInterview;
-create table OnlineInterview
+drop table if exists OnSiteInterview;
+create table OnSiteInterview
 	(EvaluationID varchar(50) not null PRIMARY KEY,
-	URL varchar(100) not null,
+	Location char(50) not null,
 	FOREIGN KEY (EvaluationID) REFERENCES Evaluation(EvaluationID));
 
 
@@ -207,8 +211,8 @@ values('1876', '1 hour','2018-11-15','12:30:00','20180401','20180501');
 insert into Evaluation
 values('1879', '2 hour','2018-11-14','12:30:00','20180601','20180301');
 
-insert into OnlineInterview
-values('1876','http://www.amazon.com');
+insert into OnSiteInterview
+values('1876','2525 West Mall,Vancouver,BC');
 
 
 insert into PhoneInterview
@@ -219,6 +223,9 @@ values('1879','1961 E Mall,Vancouver,BC');
 
 insert into Offer
 values('RX1286','1876','16','2018-11-30');
+
+insert into Request
+values('kikiloveme','cd1234');
 
 
 
