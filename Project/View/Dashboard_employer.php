@@ -46,37 +46,16 @@ session_start();
 	if (isset($_GET["view_my_schedule"])) {
 		echo "<table>"; // start a table tag in the HTML
 		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Applicant' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Form' . "</td></tr>";
-		$query = "SELECT * FROM evaluation NATURAL JOIN phoneinterview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person";
-		$query .= " WHERE evaluation.Employer_SIN = " . $_SESSION['sin'];
+		$query = "SELECT * FROM interview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person ";
+		$query .= " WHERE Employer_SIN = " . $_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
 		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . "Phone Interview" . "</td><td>" . $row['PhoneNumber'] . "</td></tr>";
+			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Form'] . "</td></tr>";
 		}
-
-		$query = "SELECT * FROM evaluation NATURAL JOIN examinterview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person";
-		$query .= " WHERE evaluation.Employer_SIN = " . $_SESSION['sin'];
-		$result = mysqli_query($connection, $query);
-		if (!$result) {
-			die("Query Failed" . mysqli_error($connection));
-		}
-		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . "Exam Interview" . "</td><td>" . $row['Location'] . "</td></tr>";
-		}
-
-		$query = "SELECT * FROM evaluation NATURAL JOIN onsiteinterview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person";
-		$query .= " WHERE evaluation.Employer_SIN = " . $_SESSION['sin'];
-		$result = mysqli_query($connection, $query);
-		if (!$result) {
-			die("Query Failed" . mysqli_error($connection));
-		}
-		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . "Onsite Interview" . "</td><td>" . $row['Location'] . "</td></tr>";
-		}
-		echo "</table>"; //Close the table in HTML
-		echo "</form>";
+		echo "</table>";
 	}
 
 	?>
