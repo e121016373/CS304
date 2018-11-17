@@ -1,5 +1,11 @@
 <?php include "../Controller/DB.php";
-session_start();
+include "../Controller/Employers.php";
+// session_start();
+?>
+<?php 
+if(deleteJob()) {
+	// header("Location :Dashboard_employer.php?view_my_job_postings=");
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,13 +35,13 @@ session_start();
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
-		echo "<form action =\"modify_job.php\" method =\"post\">";
+		echo "<form action =\"Dashboard_employer.php\" method =\"post\">";
 		echo "<table>"; // start a table tag in the HTML
 		echo "<tr><td>" . "JobID" . "</td><td>" . 'CompanyName' . "</td><td>" . 'Requirements' . "</td><td>" . 'Description' . "</td><td>" . 'Location' . "</td><td>" . 'Type' . "</td><td>" . 'Salary' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Requirements'] . "</td><td>" . $row['Description'] . "</td><td>" . $row['Location'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Salary'] . "</td>";
 			echo "<td><button type = \"submit\" name = \"modify_job\" value = ". $row['JobID'] . ">Modify</button></td></td>"; 
-			echo "<td><button type = \"submit\" name = \"modify_job\" value = ". $row['JobID'] . ">Delete</button></td></tr>"; 
+			echo "<td><button type = \"submit\" name = \"delete_job\" value = ". $row['JobID'] . ">Delete</button></td></tr>"; 
 		}
 		echo "</table>"; //Close the table in HTML 
 		echo "</form>";

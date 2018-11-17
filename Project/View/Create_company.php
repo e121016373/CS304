@@ -1,7 +1,10 @@
 <?php
-
-if(isset($_POST["register_company"])) {
-	header("Location: Register_employer.php");
+include "../Controller/Employers.php";
+include "../Controller/DB.php"
+?>
+<?php
+if(registerCompany()) {
+	//header("Location: Register_employer.php");
 }
 
 ?>
@@ -17,7 +20,7 @@ Field -->
 </head>
 <body>
 	<h1> Create Your Own Campany</h1>
-	<form action = "Register_employer.php" method = "post">
+	<form action = "Create_company.php" method = "post">
 		<label for="companyName">CompanyName</label>
 		<input id="companyName" type="text" name="companyName" required>
 
@@ -29,7 +32,7 @@ Field -->
 		<br>
 
 		<label for="company_info">Contact Info</label>
-		<input id="company_info" type="text" name="Contact Info">
+		<input id="company_info" type="text" name="Contact_info">
 
 		<br>
 		<label for="field">Field</label>

@@ -1,3 +1,16 @@
+<?php 
+include "../Controller/Employers.php";
+include "../Controller/DB.php"
+?>
+<?php 
+createJobs();
+?>
+<?php 
+if(isset($_POST['post_job'])) {
+	header("Location:Dashboard_employer.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +41,14 @@
 		<br>
 		<label for="location">Location</label>
 		<input id="location" type="text" name="location">
+
+		<br>
+		<label for="type">Job Type</label>
+		<input id="type" type="text" name="type">
+
+		<br>
+		<label for="salary">Salary</label>
+		<input id="salary" type="text" name="salary">
 
 		<br>
 		<input type="submit" name="post_job">
