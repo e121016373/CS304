@@ -4,6 +4,15 @@
 		header("Location: Register_employer.php");
 		exit;
 	}
+	include "../Controller/General.php";
+
+	if(isset($_POST["submit"])) {
+		if(login() == 'employer') {
+			header("Location:Dashboard_employer.php");
+			exit();
+		}
+	}
+
 
 ?>
 <link rel="stylesheet" type="text/css" href="template2.css"/>
@@ -25,7 +34,7 @@
 
 		<div>
 			<label for="password">Password</label>
-			<input type="password" name = "password" class = "form-control">
+			<input type="password" name = "Password" class = "form-control">
 		</div>
 
 		<input type="submit" name="register" value = "register" style="background-color: tomato;margin-top: 2%;"></input> 
