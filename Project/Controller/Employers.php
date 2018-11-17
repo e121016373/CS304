@@ -2,6 +2,7 @@
 session_start();
 
 // debugged
+// create an employer and insert it into both person and employer table
 function createEmployer() {
 	if(isset($_POST["register"])) {
 		global $connection;
@@ -40,161 +41,184 @@ function createEmployer() {
 	}
 }
 
-
+//debugged
 function registerCompany() {
-	global $connection;
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
+	if(isset($_POST["register_company"])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 
-	if(isset($_POST["submit"])) {
 		$companyName = mysqli_real_escape_string($connection, $_POST['companyName']);
-		$size = mysqli_real_escape_string($connection, $_POST['size']);
-		$contactInfo = mysqli_real_escape_string($connection, $_POST['contactInfo']);
+		$size = mysqli_real_escape_string($connection, $_POST['companySize']);
+		$contactInfo = mysqli_real_escape_string($connection, $_POST['Contact_info']);
 		$field = mysqli_real_escape_string($connection, $_POST['field']);
-	}
-
-	if (isset($companyName) && isset($size) && isset($contactInfo) && isset($field)) {
-		$sql = "INSERT INTO Company (companyName, size, contactInfo, field)
+		
+		$sql = "INSERT INTO company(CompanyName, CompanySize, Contact_Info, Field)
 			VALUES ('$companyName', '$size', '$contactInfo', '$field')";
-	} else {
-		echo 'Must enter all fields';
-	}
 
-	if(mysqli_query($connection, $sql)) {
-		echo "Record created successfully";
-	} else {
-		echo "Failed to register company: ".mysqli_error($connection);
+		$result = mysqli_query($connection, $sql);
+
+		if(!$result) {
+			die("Failed to register company: ".mysqli_error($connection));
+		} else {
+			echo "Record created successfully";
+			return true;
+		}
 	}
 }
 
+// debugged
+// companyName must exist in Company table
 function createJobs() {
-	global $connection;
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
+	if(isset($_POST["post_job"])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 
-	if(isset($_POST["submit"])) {
-		$jobID = mysqli_real_escape_string($connection, $_POST['Job ID']);
-		$requirement = mysqli_real_escape_string($connection, $_POST['Requirement']);
-		$description = mysqli_real_escape_string($connection, $_POST['Desrciption']);
-		$location = mysqli_real_escape_string($connection, $_POST['Location']);
-		$type = mysqli_real_escape_string($connection, $_POST['Type']);
-		$salary = mysqli_real_escape_string($connection, $_POST['Salary']);
-		$employerSIN = mysqli_real_escape_string($connection, $_POST['Employer SIN']);
-	}
+		$jobID = mysqli_real_escape_string($connection, $_POST['jobid']);
+		$companyName = mysqli_real_escape_string($connection, $_POST['companyName']);
+		$requirement = mysqli_real_escape_string($connection, $_POST['requirements']);
+		$description = mysqli_real_escape_string($connection, $_POST['description']);
+		$location = mysqli_real_escape_string($connection, $_POST['location']);
+		$type = mysqli_real_escape_string($connection, $_POST['type']);
+		$salary = mysqli_real_escape_string($connection, $_POST['salary']);
+		$employerSIN = mysqli_real_escape_string($connection, $_SESSION['sin']);
 
-	if (isset($jobID) && isset($requirement) && isset($description) && isset($location) && isset($type) && isset($salary) && isset($employerSIN)) {
-		$sql = "INSERT INTO PostedJob (jobID, requirement, description, location, type, salary, employerSIN)
-			VALUES ('$jobID', '$requirement', '$description', '$location', '$type', '$salary', '$employerSIN')";
-	} else {
-		echo 'Must enter all fields';
-	}
+		// refactor this in the future
+		if (!mysqli_query($connection, "SELECT * FROM Company WHERE CompanyName = '$companyName'")) {
+			echo "Company does not exist.";
+		} else {
+			$sql = "INSERT INTO PostedJob (JobID, CompanyName, Requirements, Description, Location, Type, Salary, Employer_SIN) VALUES ('$jobID', '$companyName', '$requirement', '$description', '$location', '$type', '$salary', '$employerSIN')";
+		}
 
-	if(mysqli_query($connection, $sql)) {
-		echo "Record created successfully";
-	} else {
-		echo "Failed to register company: ".mysqli_error($connection);
+		if(mysqli_query($connection, $sql)) {
+			echo "New Job posted successfully";
+			return true;
+		} else {
+			echo "Failed to register company: ".mysqli_error($connection);
+		}
 	}
 }
 
 function updateJobs() {
-	global $connection;
+	if(isset($_POST["modify_job"])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
-
-	if(isset($_POST["submit"])) {
-		$jobID = mysqli_real_escape_string($connection, $_POST['Job ID']);
+		$jobID = mysqli_real_escape_string($connection, $_POST['jobid']);
 		$jobidQuery = "SELECT * FROM PostedJob WHERE JobID = $jobid";
 
 		if (!mysqli_query($connection, $jobidQuery)) {
 			die('Failed to find Job ID: '. $jobID);
 		} else {
-			$requirement = mysqli_real_escape_string($connection, $_POST['Requirement']);
-			$description = mysqli_real_escape_string($connection, $_POST['Desrciption']);
-			$location = mysqli_real_escape_string($connection, $_POST['Location']);
-			$type = mysqli_real_escape_string($connection, $_POST['Type']);
-			$salary = mysqli_real_escape_string($connection, $_POST['Salary']);
-			$employerSIN = mysqli_real_escape_string($connection, $_POST['Employer SIN']);
+			$requirement = mysqli_real_escape_string($connection, $_POST['requirements']);
+			$description = mysqli_real_escape_string($connection, $_POST['description']);
+			$location = mysqli_real_escape_string($connection, $_POST['location']);
+			$type = mysqli_real_escape_string($connection, $_POST['type']);
+			$salary = mysqli_real_escape_string($connection, $_POST['salary']);
+			$employerSIN = mysqli_real_escape_string($connection, $_SESSION['sin']);
+		}
+
+		$sql = "UPDATE PostedJob SET Requirements = $requirement, Desrciption = $description, Location = $location, Type = $type, Salary = $salary, Employer_SIN = $employerSIN, WHERE JobID = $jobID";
+
+		if (mysqli_query($connection, $sql)) {
+			echo "Record updated successfully";
+			return true;
+		} else {
+			echo "Error updating record: ". mysqli_error($connection);
 		}
 	}
+}
 
-	$sql = "UPDATE PostedJob SET Requirement = $requirement, Desrciption = $description, Location = $location, Type = $type, Salary = $salary, EmployerSIN = $employerSIN, WHERE JobID = $jobID";
+function deleteJob() {
+	if (isset($_POST['delete_job'])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 
-	if (mysqli_query($connection, $sql)) {
-		echo "Record updated successfully";
-	} else {
-		echo "Error updating record: ". mysqli_error($connection);
+		$jobid = mysqli_real_escape_string($connection, $_POST['delete_job']);
+		$sql = "DELETE FROM PostedJob WHERE JobID = '$jobid'";
+		$result = mysqli_query($connection, $sql);
+		if(!$result) {
+			die('Could not delete Job: ' . mysqli_error($connection));
+		} else {
+			echo "Deleted job successfully.";
+			return true;
+		}
+
+		// how to retrieve job id
+		// something like this:
+		// $_POST['modify_job']
 	}
-
 }
 
 function setEvaluation() {
-	global $connection;
-
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
-
 	if(isset($_POST["submit"])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
+
 		$evaluationID = mysqli_real_escape_string($connection, $_POST['Evaulation ID']);
 		$length = mysqli_real_escape_string($connection, $_POST['Length']);
 		$date = mysqli_real_escape_string($connection, $_POST['Date']);
 		$time = mysqli_real_escape_string($connection, $_POST['time']);
 		$employerSIN = mysqli_real_escape_string($connection, $_POST['Employer SIN']);
 		$applicationID = mysqli_real_escape_string($connection, $_POST['Application ID']);
-	}
+	
 
-	if (isset($evaluationID) && isset($length) && isset($date) && isset($time) && isset($employerSIN) && isset($applicationID)) {
-		$sql = "INSERT INTO Evaulation (Evaulation ID, Length, EDate, ETime, Employer SIN, Application ID) 
-		VALUES ('$evaluationID', '$length', '$date', '$time', '$employerSIN', '$applicationID')";
-	} else {
-		echo 'Must enter all fields';
-	}
+		if (isset($evaluationID) && isset($length) && isset($date) && isset($time) && isset($employerSIN) && isset($applicationID)) {
+			$sql = "INSERT INTO Evaulation (EvaulationID, Length, Date, Time, Employer_SIN, ApplicationID) VALUES ('$evaluationID', '$length', '$date', '$time', '$employerSIN', '$applicationID')";
+		} else {
+			echo 'Must enter all fields';
+		}
 
-	if (mysqli_query($connection, $sql)) {
-		echo "Record created successfully";
-	} else {
-		echo "Error creating evaluation: ". mysqli_error($connection);
+		if (mysqli_query($connection, $sql)) {
+			echo "Record created successfully";
+		} else {
+			echo "Error creating evaluation: ". mysqli_error($connection);
+		}
 	}
 }
 
 function giveOffer() {
-	global $connection;
-
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
-
 	if(isset($_POST["submit"])) {
-		$offerID = mysqli_real_escape_string($connection, $_POST['Offer ID']);
-		$salary = mysqli_real_escape_string($connection, $_POST['Salary']);
-		$startDate = mysqli_real_escape_string($connection, $_POST['Start Date']);
-	}
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 
-	if (isset($offerID) && isset($salary) && isset($startDate)) {
-		$sql = "INSERT INTO Offer (Offer ID, Salary, StartDate)
-			VALUES ('$offerID', '$salary', '$startDate')";
-	} else {
-		echo 'Must enter all fields';
-	}
+		$offerID = mysqli_real_escape_string($connection, $_POST['offerid']);
+		$evaluationID = mysqli_real_escape_string($connection, $_POST['evaluationid']);
+		$salary = mysqli_real_escape_string($connection, $_POST['salary']);
+		$startDate = mysqli_real_escape_string($connection, $_POST['startDate']);
+	
+		if (isset($offerID) && isset($salary) && isset($startDate)) {
+			$sql = "INSERT INTO Offer (OfferID, EvaluationID, Salary, StartDate) VALUES ('$offerID', '$evaluationID', '$salary', '$startDate')";
+		} else {
+			echo 'Must enter all fields';
+		}
 
-	if (mysqli_query($connection, $sql)) {
-		echo "Record created successfully";
-	} else {
-		echo "Error creating evaluation: ". mysqli_error($connection);
+		if (mysqli_query($connection, $sql)) {
+			echo "Record created successfully";
+		} else {
+			echo "Error creating evaluation: ". mysqli_error($connection);
+		}
 	}
 }
 
 function viewReview() {
-	global $connection;
-
-	if (!$connection) {
-		die('Failed to connect: ' . mysqli_error());
-	}
 	if(isset($_POST['review'])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
+
 		$companyName = mysqli_real_escape_string($connection, $_POST['CompanyName']);
 		$sql = "SELECT *
 			FROM Review

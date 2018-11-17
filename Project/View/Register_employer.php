@@ -3,6 +3,14 @@ include "../Controller/Employers.php";
 include "../Controller/DB.php"
 ?>
 
+<?php
+if(createEmployer()) header("Location:Dashboard_employer.php");
+?>
+<?php
+if(isset($_POST['createCompany'])) {
+	header("Location:Create_company.php");
+}
+?>
 
 <!DOCTYPE html>
 <html>
