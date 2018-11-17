@@ -24,7 +24,7 @@ drop table if exists Company;
 create table Company
 	(CompanyName varchar(50) not null PRIMARY KEY, 
     CompanySize int not null,
-    Contact_Info varchar(100) not null,
+    Company_Info varchar(300) not null,
 	Field varchar(30) not null);
 
 
@@ -43,7 +43,11 @@ create table Applicant
 	(SIN int not null PRIMARY KEY,
 	Industry char(100) null,
     FOREIGN KEY (SIN) REFERENCES Person(SIN));
-	
+
+drop table if exists Request;
+create table Request
+	(Sender_Username varchar(30) not null PRIMARY KEY,
+	Receiver_Username varchar(30) not null);
 
 drop table if exists Employer;
 create table Employer
@@ -58,8 +62,8 @@ create table PostedJob
 	CompanyName varchar(50) not null,
 	Requirements varchar(500) not null,
 	Description varchar(500) not null,
-	Location char(30) not null,
-	Type char(10) null,
+	Location varchar(1000) not null,
+	Type varchar(50) null,
 	Salary int null,
 	Employer_SIN int not null,	
     FOREIGN KEY (Employer_SIN) REFERENCES Person(SIN),
@@ -76,35 +80,18 @@ create table Application
     FOREIGN KEY (Applicant_SIN) REFERENCES Person(SIN),
 	FOREIGN KEY (JobID) REFERENCES PostedJob(JobID));
 
-drop table if exists Evaluation;
-create table Evaluation
+drop table if exists Interview;
+create table Interview
 	(EvaluationID varchar(50) not null PRIMARY KEY,
 	Length char(50) not null,
 	Date date not null,
 	Time time not null,
 	Employer_SIN int not null,
 	ApplicationID int null,
+	Type char(50) not null,
+	Form varchar(1000) null,
     FOREIGN KEY (Employer_SIN) REFERENCES Person(SIN),
     FOREIGN key (ApplicationID) REFERENCES Application(ApplicationID));
-
-drop table if exists OnlineInterview;
-create table OnlineInterview
-	(EvaluationID varchar(50) not null PRIMARY KEY,
-	URL varchar(100) not null,
-	FOREIGN KEY (EvaluationID) REFERENCES Evaluation(EvaluationID));
-
-
-drop table if exists PhoneInterview;
-create table PhoneInterview
-	(EvaluationID varchar(50) not null PRIMARY KEY,
-    PhoneNumber varchar(50) not null,
-	FOREIGN KEY (EvaluationID) REFERENCES Evaluation(EvaluationID) ON DELETE CASCADE ON UPDATE CASCADE);
-
-drop table if exists ExamInterview;
-create table ExamInterview
-	(EvaluationID varchar(50) not null PRIMARY KEY,
-	Location char(50) not null,
-	FOREIGN KEY (EvaluationID) REFERENCES Evaluation(EvaluationID) ON DELETE CASCADE ON UPDATE CASCADE);
 
 drop table if exists Offer;
 create table Offer
@@ -200,25 +187,22 @@ values('2714', '20180301','2314','I am Jessica chou,I am 22 years old and I grad
 Strong logical thinking ability, can reasonably plan the relationship between work and life.');
 
 
-insert into Evaluation
-values('1876', '1 hour','2018-11-15','12:30:00','20180401','20180501');
+insert into Interview
+values('1876', '1 hour','2018-11-15','12:30:00','20180401','2908', 'OnSite Interview', 'Location: 1961 E Mall,Vancouver,BC');
 
 
-insert into Evaluation
-values('1879', '2 hour','2018-11-14','12:30:00','20180601','20180301');
+insert into Interview
+values('1879', '2 hour','2018-11-14','12:30:00','20180601','2714', 'Phone Interview', '7783247912');
 
-insert into OnlineInterview
-values('1876','http://www.amazon.com');
+insert into Interview
+values('1888', '3 hour','2018-11-16','9:30:00','20180401','2714', 'Exam Interview', 'Location: 1961 E Mall,Vancouver,BC');
 
-
-insert into PhoneInterview
-values('1876','7783247912');
-
-insert into ExamInterview
-values('1879','1961 E Mall,Vancouver,BC');
 
 insert into Offer
 values('RX1286','1876','16','2018-11-30');
+
+insert into Request
+values('kikiloveme','cd1234');
 
 
 

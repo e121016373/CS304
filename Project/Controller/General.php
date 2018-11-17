@@ -11,14 +11,23 @@ function login() {
 		
 		$result = mysqli_query($connection, "SELECT * from person WHERE '$username'=Username and '$password'=Password");
 		
+		
 		if (!$result){
 			die("Login Fails " . mysqli_error($connection));
 		} else {
+			
 			$_SESSION['username'] = $username;
 			$row = mysqli_fetch_assoc($result);
 			$_SESSION['name'] = $row['Name'];
 			$_SESSION['sin'] = $row['SIN'];
-			return true;
+			
+			$role = 'employer'; 
+			$sin = $row['SIN'];
+			if (mysqli_num_rows(mysqli_query($connection, "SELECT * from applicant WHERE SIN='$sin'")) != 0){
+					$role = 'applicant';
+			}
+			return $role;
+			
 		}
 	
 	}
@@ -34,28 +43,31 @@ function sendRequest() {
 		if (!$result) {
 			die("User not found: " . mysqli_error($connection));
 		} else {
-			$_SESSION['receiver'] = $receiver;
 			$sender = $_SESSION['username'];
 			$_SESSION['sender'] = $sender;
 			$sql = "INSERT INTO Request(Sender, Receiver) VALUES('$sender', '$receiver')";
-			mysqli_query($connection, $sql);
-			echo "Request sent.";
+			if (mysqli_query($connection, $sql)) {
+				echo "Request sent.";
+			}
 		}
 	}
 }
 
-// TODO
 /*
 function acceptRequest() {
 	if(isset($_POST["accept"])) {
 		global $connection;
-		$senderQuery = "SELECT Sender FROM Person WHERE '$_SESSION['username'] = Receiver"
-		
+		$receiver = $_SESSION['username'];
+		$senderQuery = "SELECT Sender FROM Request WHERE '$receiver' = Receiver";
+		$senderList = mysqli_query($connection, $senderQuery);
 
-		$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES ('$_SESSION['sin']', '$connectionSIN')";
+		if(!$senderList) {
+			die("Request not found: " . mysqli_error($connection));
+		} else {
+			while ($row = mysqli_fetch_assoc($senderList)) {
 
-
-		$connectionSIN = $_SESSION[''];
+			}
+		}
 
 		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
 		if (!$result) {
@@ -68,4 +80,5 @@ function acceptRequest() {
 	}
 }
 */
+
 ?>

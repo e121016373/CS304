@@ -6,7 +6,11 @@ include "../Controller/DB.php"
 <?php
 if(createEmployer()) header("Location:Dashboard_employer.php");
 ?>
-
+<?php
+if(isset($_POST['createCompany'])) {
+	header("Location:Create_company.php");
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +19,7 @@ if(createEmployer()) header("Location:Dashboard_employer.php");
 </head>
 <body>
 	<h1>Register</h1>
-	<form action="Register_employer.php" method = "post" id=registration_form>
+	<form action="Register_employer.php" method = post id=registration_form>
 
 		<label for="username">Username</label>
 		<input id="username" type="text" name="username" required>
@@ -48,7 +52,7 @@ if(createEmployer()) header("Location:Dashboard_employer.php");
 		<br>
 
 		<label for="work_experience">Work Experience</label>
-		<textarea id="work_experience" type="text" name="work_experience"></textarea>
+		<textarea id="work_experience" type="text" name="contact_info"></textarea>
 
 		<br>
 
@@ -77,7 +81,7 @@ if(createEmployer()) header("Location:Dashboard_employer.php");
 
 	</form>
 	<p> Didn't find your company? Create your own.</p>
-	<form action="Register_employer.php" method = "post" id=registration_form>
+	<form action="Register_employer.php" method = post id=registration_form>
 		<input type="submit" name="createCompany" value="Create Company">
 	</form>
 
