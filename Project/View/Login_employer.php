@@ -10,6 +10,8 @@
 		if(login() == 'employer') {
 			header("Location:Dashboard_employer.php");
 			exit();
+		} else {
+			echo "Wrong password/user";
 		}
 	}
 
