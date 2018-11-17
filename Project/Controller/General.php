@@ -46,18 +46,17 @@ function sendRequest() {
 			$_SESSION['receiver'] = $receiver;
 			$sender = $_SESSION['username'];
 			$_SESSION['sender'] = $sender;
-			$sql = "INSERT INTO Request(Sender, Receiver) VALUES('$sender', '$receiver')";
+			$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
 			mysqli_query($connection, $sql);
 			echo "Request sent.";
 		}
 	}
 }
 
-// TODO
-/*
 function acceptRequest() {
 	if(isset($_POST["accept"])) {
 		global $connection;
+		
 		$senderQuery = "SELECT Sender FROM Person WHERE '$_SESSION['username'] = Receiver"
 		
 
@@ -76,5 +75,6 @@ function acceptRequest() {
 		}
 	}
 }
-*/
+
+//TODO reject request
 ?>
