@@ -142,4 +142,22 @@ function searchJob() {
 	}
 }
 
+function deleteApplication() {
+	if(isset($_POST['cancel_job'])){
+		global $connection;
+		if(!$connection){
+			die("Database connection fails");
+		}
+			
+		$job_id = $_POST['cancel_job'];
+		$sin = $_SESSION['sin'];
+		$result = mysqli_query($connection, "DELETE FROM application where ApplicationID='$job_id' AND Applicant_SIN='$sin'");
+			
+		if($result){ 
+			echo "Application dropped";
+			
+		}
+	}
+}
+
 ?>
