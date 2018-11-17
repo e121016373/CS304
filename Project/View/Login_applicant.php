@@ -8,7 +8,9 @@
 include "../Controller/General.php";
 
 	if(isset($_POST["submit"])) {
-		if(login()) header("Location:Dashboard_applicant.php");
+		if(login() == 'applicant') {
+			header("Location:Dashboard_applicant.php");
+			exit();
 	}
 
 	
