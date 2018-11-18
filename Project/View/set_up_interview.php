@@ -1,7 +1,16 @@
 <?php include "../Controller/DB.php";
+include "../Controller/Employers.php";
 // session_start();
 ?>
 <link rel="stylesheet" type="text/css" href="template4.css"/>
+<?php 
+if(isset($_POST['setup_Interview'])) {
+		$applicationID = mysqli_real_escape_string($connection, $_POST['setup_Interview']);
+		setupInterview($applicationID);
+		header("Location:Dashboard_employer.php");
+		exit();
+	}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +44,8 @@
 		<input id="form" type="text" name="form" required>
 
 		<br>
-		<input type="submit" name="submit" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
+		<!-- <input type="submit" name="submit" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px"> -->
+		<button type="submit" name="setup_Interview" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px" value= <?php echo $_POST['set_up_interview']; ?>> Submit</button>
 	</form>
 
 </body>

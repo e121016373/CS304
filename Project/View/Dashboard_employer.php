@@ -1,9 +1,13 @@
-<?php include "../Controller/DB.php";
+<?php 
+include "../Controller/DB.php";
 include "../Controller/Employers.php";
+include "../Controller/General.php";
 // session_start();
+
+if (acceptRequest()) header("Location:Dashboard_employer.php?view_my_connection=");
+if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=");
 ?>
 
-?>
 <link rel="stylesheet" type="text/css" href="template3.css"/>
 
 <!DOCTYPE html>
@@ -95,7 +99,7 @@ include "../Controller/Employers.php";
 		</form>
 
 		<p style="margin-top: 2%; font-size: 16px;"><b>Connection Request</b></p>
-		<form action = "Dashboard_applicant.php" method = "post">
+		<form action = "Dashboard_employer.php" method = "post">
 		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 			<tr>
 				<td><b>Username</b></td>
@@ -110,10 +114,9 @@ include "../Controller/Employers.php";
 			}
 			while($row = mysqli_fetch_assoc($result)){   
 				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
-				?>
-				<td><button type = "submit" name = "accept">Accept</button></td>
-				<td><button type = "submit" name = "reject">Reject</button></td></tr>
-			<?php }?>
+				echo "<td><button type = \"submit\" name = \"accept\" value = ".$row['Username'] .">Accept?</button></td>";
+				echo "<td><button type = \"submit\" name = \"reject\" value = ".$row['Username'] .">Reject X</button></td></tr>";
+			}?>
 		</table>
 	</form>
 	<?php }

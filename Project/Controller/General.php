@@ -35,7 +35,7 @@ function login() {
 }
 
 function sendRequest() {
-	if(isset($_POST["register"])) {
+	if(isset($_POST["send"])) {
 		global $connection;
 
 		$receiver = mysqli_real_escape_string($connection, $_POST['username']);
