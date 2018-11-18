@@ -34,14 +34,13 @@ include "../Controller/Employers.php";
 			die("Query Failed" . mysqli_error($connection));
 		}
 
-		echo "<form action =\"modify_job.php\" method =\"post\">";
+		echo "<form action =\"job_action.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
 
 		echo "<tr><td>" . "JobID" . "</td><td>" . 'CompanyName' . "</td><td>" . 'Requirements' . "</td><td>" . 'Description' . "</td><td>" . 'Location' . "</td><td>" . 'Type' . "</td><td>" . 'Salary' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Requirements'] . "</td><td>" . $row['Description'] . "</td><td>" . $row['Location'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Salary'] . "</td>";
-			echo "<td><button type = \"submit\" name = \"modify_job\" value = ". $row['JobID'] . ">Modify</button></td></td>"; 
-			echo "<td><button type = \"submit\" name = \"delete_job\" value = ". $row['JobID'] . ">Delete</button></td></tr>"; 
+			echo "<td><button type = \"submit\" name = \"job_action\" value = ". $row['JobID'] . ">Action</button></tr>"; 
 		}
 		echo "</table >"; //Close the table in HTML 
 		echo "</form>";
@@ -64,7 +63,60 @@ include "../Controller/Employers.php";
 		echo "</table>";
 	}
 
-	?>
+	if (isset($_GET["view_my_connection"])) {
+		?>
+		<p>My Connections</p>
+		<form action = "sendRequest.php" method = "post">
+			<table>
+				<tr>
+					<td>Username</td>
+					<td>Name</td>
+					<td>Contact Info</td>
+					<td>Physiologocal Info</td>
+					<td>Work Experience</td>
+					<td>Education</td>
+				</tr>
+				<?php
+				$query = "(SELECT * FROM connection INNER JOIN person ON connection.User_Username = person.Username";
+				$query .= " WHERE connection.Connection_Username = \"" . $_SESSION['username'] . "\")";
+				$query .= " UNION";
+				$query .= "(SELECT * FROM connection INNER JOIN person ON connection.Connection_Username = person.Username";
+				$query .= " WHERE connection.User_Username = \"" . $_SESSION['username'] . "\")";
+				$result = mysqli_query($connection, $query);
+				if (!$result) {
+					die("Query Failed" . mysqli_error($connection));
+				}
+				while($row = mysqli_fetch_assoc($result)){   
+					echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . $row['Physiological_Info'] . "</td><td>" . $row['Work_Experience'] . "</td><td>" . $row['Education'] . "</td></tr>";
+				}
+				?>
+			</table>
+			<button type = "submit" name = "sendRequest">Send Request</button>
+		</form>
+
+		<p>Connection Request</p>
+		<form action = "Dashboard_applicant.php" method = "post">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td>Name</td>
+			</tr>
+			<?php
+			$query = "SELECT * FROM request INNER JOIN person ON Sender_Username = Username";
+			$query .= " WHERE Receiver_Username = \"" . $_SESSION['username'] . "\"";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			while($row = mysqli_fetch_assoc($result)){   
+				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
+				?>
+				<td><button type = "submit" name = "accept">Accept</button></td>
+				<td><button type = "submit" name = "reject">Reject</button></td></tr>
+			<?php }?>
+		</table>
+	</form>
+	<?php } ?>
 
 
 </body>
