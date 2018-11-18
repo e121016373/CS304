@@ -1,8 +1,9 @@
 html, body {
   background-color:lightblue;
-  background-image: url("../../image/back.jpg");
+  background-image: url("../../image/123445.jpg");
+  background-width:80%;
   background-position:bottom;
-  background-repeat:repeat;
+  background-repeat:no-repeat;
   margin: 0;
   font-family: Calibri, sans-serif;
   font-size: 13px;
