@@ -4,7 +4,7 @@ drop table if exists Person;
  create table Person
 	(SIN int not null PRIMARY KEY,
 	Password varchar(20) not null,
-	Username varchar(30) not null,
+	Username varchar(30) not null UNIQUE,
 	Name varchar(30) not null,
 	Contact_Info varchar(100) not null,
 	Physiological_Info VarChar (1000) null,
@@ -14,11 +14,11 @@ drop table if exists Person;
 
 drop table if exists Connection; 
 create table Connection
-	(User_SIN int not null,
-	Connection_SIN int not null,
-	FOREIGN KEY (User_SIN) REFERENCES Person(SIN) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (Connection_SIN) REFERENCES Person(SIN) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY(User_SIN,Connection_SIN));
+	(User_Username varchar(30) not null,
+	Connection_Username varchar(30) not null,
+	FOREIGN KEY (User_Username) REFERENCES Person(Username) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (Connection_Username) REFERENCES Person(Username) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(User_Username,Connection_Username));
 
 drop table if exists Company;
 create table Company
@@ -46,8 +46,11 @@ create table Applicant
 
 drop table if exists Request;
 create table Request
-	(Sender_Username varchar(30) not null PRIMARY KEY,
-	Receiver_Username varchar(30) not null);
+	(Sender_Username varchar(30) not null,
+	Receiver_Username varchar(30) not null,
+	FOREIGN KEY (Sender_Username) REFERENCES Person(Username) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (Receiver_Username) REFERENCES Person(Username) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(Sender_Username,Receiver_Username));
 
 drop table if exists Employer;
 create table Employer
@@ -202,7 +205,23 @@ insert into Offer
 values('RX1286','1876','16','2018-11-30');
 
 insert into Request
+values('kikiloveme','milestone');
+
+insert into Request
+values('nomarllyET','kikiloveme');
+
+insert into Request
+values('HRlocal111','kikiloveme');
+
+insert into Connection
+values('JeffreeStar','kikiloveme');
+
+insert into Connection
 values('kikiloveme','cd1234');
+
+insert into Connection
+values('nomarllyET','HRlocal111');
+
 
 
 
