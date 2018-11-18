@@ -11,6 +11,7 @@ if(isset($_POST['createCompany'])) {
 	header("Location:Create_company.php");
 }
 ?>
+<link rel="stylesheet" type="text/css" href="template.css"/>
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@ if(isset($_POST['createCompany'])) {
 		<br>
 
 		<label for="sin">SIN</label>
-		<input id="sin" type="number" name="sin" min= "8" max ="8"required>
+		<input id="sin" type="number" name="sin" size="8" maxlength="8" required>
 
 		<br>
 
@@ -77,12 +78,12 @@ if(isset($_POST['createCompany'])) {
 		</select>
 
 
-		<input type="submit" name="register">
+		<input type="submit" name="register" style="background-color:tomato;font-size: 15px;border-radius: 12px;margin-top: 1%">
 
 	</form>
-	<p> Didn't find your company? Create your own.</p>
+	<p style="font-size: 20px;margin-top: 2%;color:orange"> <b>Didn't find your company? Create your own</b></p>
 	<form action="Register_employer.php" method = post id=registration_form>
-		<input type="submit" name="createCompany" value="Create Company">
+		<input type="submit" name="createCompany" value="Create Company" style="background-color:#4CAF50;font-size:20px;border-radius: 12px">
 	</form>
 
 </body>

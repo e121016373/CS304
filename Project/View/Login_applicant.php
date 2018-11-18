@@ -16,6 +16,7 @@ include "../Controller/General.php";
 		}
 	}
 
+
 	
 ?>
 <link rel="stylesheet" type="text/css" href="template2.css"/>

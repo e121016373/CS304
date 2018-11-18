@@ -206,6 +206,7 @@ values('RX1286','1876','16','2018-11-30');
 
 insert into Request
 values('kikiloveme','milestone');
+<<<<<<< HEAD
 
 insert into Request
 values('nomarllyET','kikiloveme');
@@ -223,7 +224,20 @@ insert into Connection
 values('nomarllyET','HRlocal111');
 
 
+=======
 
+insert into Request
+values('nomarllyET','kikiloveme');
+>>>>>>> 2c1d3cbfbf2bff03f8b440bffcc7068ccb1db847
 
+insert into Request
+values('HRlocal111','kikiloveme');
 
+insert into Connection
+values('kikiloveme','JeffreeStar');
 
+insert into Connection
+values('kikiloveme','cd1234');
+
+insert into Connection
+values('nomarllyET','HRlocal111');
