@@ -1,25 +1,29 @@
-html, body {
+body {
   background-color:lightblue;
-  background-image: url("../../image/123445.jpg");
-  background-width:80%;
+  background-image: url("../../image/social2.jpg");
   background-position:bottom;
-  background-repeat:no-repeat;
+  background-repeat:repeat;
   margin: 0;
   font-family: Calibri, sans-serif;
   font-size: 13px;
   text-align: center;
+  background-width:200%;
 
 
 }
-form{margin-top:2%;
-   }
+form{margin-top:4%;
+    font-size: 30px;
+  text-align: center;
+  color:#1E90FF;}
 button{
+
   border-radius: 12px;
-  font-size: 13px;
+  font-size: 15px;
    background-color: #4CAF50;
    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    margin-top:2%;
 }
