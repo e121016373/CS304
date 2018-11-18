@@ -158,7 +158,10 @@ values('20180102', 'Starbucks', '9', 'It is my favourite coffe shop in the world
  
 insert into Review
 values('20180301', 'HUAWEI', '8', 'I have been worked as an inter in HUAWEI for two month,It is a good company and the working environment is great!But everybody are working so hard that makes me feel so nervous and have so much pressure.');
- 
+
+insert into Review
+values('20180501', 'HUAWEI', '4', 'hahaha');
+
 insert into Applicant
 values('20180102', 'server');
 
@@ -223,6 +226,5 @@ values('kikiloveme','cd1234');
 insert into Connection
 values('nomarllyET','HRlocal111');
 
-insert into Connection
-values('kikiloveme','JeffreeStar');
+
 

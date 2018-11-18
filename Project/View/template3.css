@@ -3,7 +3,7 @@ html, body {
   background-image: url("../../image/123445.jpg");
   background-width:80%;
   background-position:bottom;
-  background-repeat:no-repeat;
+  background-repeat:repeat;
   margin: 0;
   font-family: Calibri, sans-serif;
   font-size: 13px;
@@ -22,4 +22,32 @@ button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
+}
+
+.star-ratings-css {
+  unicode-bidi: bidi-override;
+  color: #c5c5c5;
+  font-size: 25px;
+  height: 25px;
+  width: 100px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
+  
+  &-top {
+    color: #e7711b;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  &-bottom {
+    padding: 0;
+    display: block;
+    z-index: 0;
+  }
 }
