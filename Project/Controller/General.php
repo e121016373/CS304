@@ -1,6 +1,7 @@
 <?php
 include "DB.php";
-session_start();
+
+if(!isset($_SESSION)) session_start();
 
 function login() {
 	if(isset($_POST["submit"])) {
@@ -77,15 +78,17 @@ function acceptRequest() {
 		} */
 		$receiver = $_SESSION['username'];
 		$sender = $_POST['accept'];
-		
+				
 		$dropRequest = mysqli_query($connection, "DELETE FROM request where Sender_Username='$sender' AND Receiver_Username='$receiver'");
 		$addConnection = mysqli_query($connection, "INSERT INTO connection VALUES('$sender', '$receiver')");
 		//$addConnection1 = mysqli_query($connection, "INSERT INTO connection VALUES('$reciver', '$sender')");
 
 		if (!$dropRequest or !$addConnection /* or !$addConnection1*/) {
 			die("Accept fails. " . mysqli_error($connection));
+			return true;
 		} else {
 			echo "Request accepted.";
+			return true;
 		}
 	}
 }
@@ -101,8 +104,10 @@ function rejectRequest(){
 		
 		if(!$dropRequest){
 			die("Reject fails. " . mysqli_error($connection));
+			return true;
 		} else {
 			echo "Reject accepted.";
+			return true;
 		}
 		
 	}

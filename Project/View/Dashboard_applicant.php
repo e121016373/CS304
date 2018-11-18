@@ -1,9 +1,13 @@
 <?php 
 include "../Controller/DB.php";
 include "../Controller/Applicants.php";
+include "../Controller/General.php";
 //session_start();
 
 deleteApplication();
+if (acceptRequest()) header("Location:Dashboard_applicant.php?view_my_connection=");
+if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection=");
+
 
 ?>
 <link rel="stylesheet" type="text/css" href="template3.css"/>
@@ -136,12 +140,14 @@ deleteApplication();
 			}
 			while($row = mysqli_fetch_assoc($result)){   
 				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
-				?>
-				<td><button type = "submit" name = "accept" style = " background-color:transparent;color:#FF8C00;font-size: 20"><b>Accept?</b></button></td>
-				<td><button type = "submit" name = "reject" style = " background-color:transparent;color:tomato;font-size: 20"><b>Reject X</b></button></td></tr>
-			<?php }?>
+				//echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>"; 
+				
+				echo "<td><button type = \"submit\" name = \"accept\" value = ".$row['Username'] .">Accept?</button></td>";
+				echo "<td><button type = \"submit\" name = \"reject\" value = ".$row['Username'] .">Reject X</button></td></tr>";
+			}?>
 		</table>
 	</form>
+
 	<?php 
 	} 
 	if (isset($_GET["view_reviews"])) {
@@ -203,9 +209,6 @@ deleteApplication();
 			echo "<br><br>";
 		}
 		} ?>
-
-
-
 
 </body>
 </html>
