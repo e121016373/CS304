@@ -125,6 +125,7 @@ deleteApplication();
 				?>
 			</table>
 			<button type = "submit" name = "sendRequest">Send Request</button>
+			
 		</form>
 
 		<p style= "font-size: 15px;"><b>Connection Request</b></p>
