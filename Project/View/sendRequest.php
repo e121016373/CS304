@@ -1,6 +1,6 @@
 <?php
 include "../Controller/General.php";
-if(isset($_POST['send'])){
+if(isset($_POST['register'])){
 	if(sendRequest()) header("Location:Dashboard_applicant.php?view_my_connection=.php");
 }
 

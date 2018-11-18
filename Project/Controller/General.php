@@ -34,7 +34,7 @@ function login() {
 }
 
 function sendRequest() {
-	if(isset($_POST["send"])) {
+	if(isset($_POST["register"])) {
 		global $connection;
 
 		$receiver = mysqli_real_escape_string($connection, $_POST['username']);
@@ -47,17 +47,16 @@ function sendRequest() {
 			if($result->num_rows ===0){
 				echo "User not found.";
 			} else {
-			$sender = $_SESSION['username'];
-			
-			echo $sender;
-			echo $receiver; 
-			$sql = "INSERT INTO request(Sender_Username, Receiver_Username) VALUES('$sender', '$$receiver')";
-			$result = mysqli_query($connection, $sql);
-			
-			if(!$result){
-				echo "Something went wrong" . mysqli_error($connection);
-			} else {
-				echo "Request sent.";}
+				$sender = $_SESSION['username'];
+				$sql = "INSERT INTO request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
+				$result = mysqli_query($connection, $sql);
+				
+				if(!$result) {
+					echo "Something went wrong" . mysqli_error($connection);
+				} else {
+					echo "Request sent.";
+					return true;
+				}
 			}
 		}
 	}
