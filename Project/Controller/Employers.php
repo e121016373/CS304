@@ -102,6 +102,7 @@ function createJobs() {
 	}
 }
 
+//debugged
 function updateJobs($jobid, $companyName, $requirement, $description, $location, $type, $salary) {
 	if(isset($_POST['update_job'])) {
 		global $connection;
@@ -127,6 +128,7 @@ function updateJobs($jobid, $companyName, $requirement, $description, $location,
 	}
 }
 
+//debugged
 function deleteJob() {
 	if (isset($_POST['delete_job'])) {
 		global $connection;
@@ -227,6 +229,29 @@ function viewReview() {
 			}
 		}
 	}	
+}
+
+//Use parameter to pass arguments
+// write them in job_action.php
+function setupInterview() {
+	if(isset($_POST['submit'])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
+
+		$eResult = mysqli_query($connection, "SELECT EvaluationID FROM Interview WHERE MAX(EvaluationID)");
+		$row = mysqli_fetch_row($eResult);
+		$evaluationID = $row['EvaluationID'] + 1;
+		$length = mysqli_real_escape_string($connection, $_POST['length']);
+		$date = mysqli_real_escape_string($connection, $_POST['date']);;
+		$time = mysqli_real_escape_string($connection, $_POST['time']);
+		$employerSIN = mysqli_real_escape_string($connection, $_SESSION['sin']);
+		//TODO maybe add applicationID
+		$applicationID = mysqli_real_escape_string($connection, $_POST['set_up_interview']);
+		$type = mysqli_real_escape_string($connection, $_POST['type']);
+		$form = mysqli_real_escape_string($connection, $_POST['form']);
+	}
 }
 
 ?>
