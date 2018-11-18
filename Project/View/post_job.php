@@ -10,14 +10,16 @@ if(isset($_POST['post_job'])) {
 	header("Location:Dashboard_employer.php");
 }
 ?>
+<link rel="stylesheet" type="text/css" href="template4.css"/>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Post a New Job</title>
 </head>
-<body>
-	<h1>Post a New Job</h1>
+
+<body >
+	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:4%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 40px;text-align: center">Post a New Job</h1>
 	<form action="post_job.php" method = "post">
 
 		<label for="JobID">JobID</label>
@@ -51,7 +53,7 @@ if(isset($_POST['post_job'])) {
 		<input id="salary" type="text" name="salary">
 
 		<br>
-		<input type="submit" name="post_job">
+		<button type="submit" name="submit">Submit</button>
 
 
 </body>

@@ -45,13 +45,14 @@ function sendRequest() {
 		} else {
 			$sender = $_SESSION['username'];
 			$_SESSION['sender'] = $sender;
-			$sql = "INSERT INTO Request(Sender, Receiver) VALUES('$sender', '$receiver')";
-			if (mysqli_query($connection, $sql)) {
-				echo "Request sent.";
-			}
+
+			$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
+			mysqli_query($connection, $sql);
+			echo "Request sent.";
 		}
 	}
 }
+
 
 /*
 function acceptRequest() {
@@ -79,6 +80,9 @@ function acceptRequest() {
 		}
 	}
 }
-*/
 
+
+//TODO reject request
+=======
+*/
 ?>
