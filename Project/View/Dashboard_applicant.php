@@ -25,7 +25,7 @@ deleteApplication();
 		<button type = "submit" name = "view_my_application">View My Application</button>
 		<button type = "submit" name = "view_my_schedule">View My Schedule</button>
 		<button type = "submit" name = "view_my_connection">View My Connection</button>
-		<button type = "submit" name = "view_my_reviews">View My Reviews</button>
+		<button type = "submit" name = "view_reviews">View Reviews</button>
 	</form>
 	
     
@@ -71,28 +71,19 @@ deleteApplication();
 		
 	}
 	if (isset($_GET["view_my_schedule"])) {
-
+		echo "<form action = \"write_review.php\" method = \"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
-		echo "<tr><td><b>" . 'Job ID' . "</td><td><b>" . 'Company Name' . "</td><td><b>" . 'Interviewer' . "</td><td><b>" . 'Date' . "</td><td><b>" . 'Time' . "</td><td><b>" . 'Length' . "</td><td><b>" . 'Type' . "</td><td><b>". 'Form' . "</td></tr>";
-		$query = "SELECT * FROM evaluation INNER JOIN employer ON employer.SIN = evaluation.Employer_SIN NATURAL JOIN person NATURAL JOIN phoneinterview NATURAL JOIN application";
+
+		echo "<tr><td><b>" . 'Job ID' . "</td><td><b>" . 'Company Name' . "</td><td><b>" . 'Interviewer' . "</td><td><b>" . 'Date' . "</td><td><b>" . 'Time' . "</td><td><b>" . 'Length' . "</td><td><b>" . 'Type' . "</td><td><b>". 'Form' . "</td><td><b>". 'Next Step' . "</td></tr>";
+		$query = "SELECT * FROM interview INNER JOIN employer ON employer.SIN = interview.Employer_SIN NATURAL JOIN person NATURAL JOIN application";
 		$query .= " WHERE Applicant_SIN = " . $_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
 		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . "Phone Interview" . "</td><td>" . $row['PhoneNumber'] . "</td></tr>";
-		}
-
-		$query = "SELECT * FROM evaluation INNER JOIN employer ON employer.SIN = evaluation.Employer_SIN NATURAL JOIN person NATURAL JOIN examinterview NATURAL JOIN application";
-
-		$query .= " WHERE Applicant_SIN = " . $_SESSION['sin'];
-		$result = mysqli_query($connection, $query);
-		if (!$result) {
-			die("Query Failed" . mysqli_error($connection));
-		}
-		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Form'] . "</td></tr>";
+			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Form'] . "</td>";
+			echo "<td><button type = \"submit\" name = \"review\" value = ". $row['CompanyName'] . ">Write Reviews</button></td></tr>"; 
 		}
 		echo "</table>";
 	}
@@ -151,7 +142,70 @@ deleteApplication();
 			<?php }?>
 		</table>
 	</form>
-	<?php } ?>
+	<?php 
+	} 
+	if (isset($_GET["view_reviews"])) {
+		?>
+		<form action="Dashboard_applicant.php">
+			<p>Which company do you like to look their reviews?</p>
+			<label for="company">Company</label>
+			<select id="company" name="company">
+			<?php
+			$query = "SELECT * FROM Company";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			while ($row = mysqli_fetch_assoc($result)) {
+				$id = $row['CompanyName'];
+				echo "<option value='$id'>$id</option>";
+			}
+
+			?>
+		</select>
+		<button type="submit" name="search_review">Search</button>
+		</form>
+	<?php
+	}
+	if (isset($_GET["search_review"])) { ?>
+		<form action="Dashboard_applicant.php">
+			<p>Which company do you like to look their reviews?</p>
+			<label for="company">Company</label>
+			<select id="company" name="company">
+			<?php
+			$query = "SELECT * FROM Company";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			echo "<option value=\"" .$_GET['company'] . "\" selected>" .$_GET['company'] . "</option>";
+			while ($row = mysqli_fetch_assoc($result)) {
+				$id = $row['CompanyName'];
+				echo "<option value='$id'>$id</option>";
+			}
+
+			?>
+		</select>
+		<button type="submit" name="search_review">Search</button>
+		</form>
+		<?php
+		$query = "SELECT * FROM review NATURAL JOIN person";
+		$query .= " WHERE CompanyName = \"" . $_GET['company'] . "\"";
+		$result = mysqli_query($connection, $query);
+		if (!$result) {
+			die("Query Failed" . mysqli_error($connection));
+		}
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo $row['Username'] . " reviewed: "; 
+			echo "Rate: " . $row['Rating'];
+			echo "<br>";
+			echo "Comment: " . $row['Comment'];
+			echo "<br><br>";
+		}
+		} ?>
+
+
+
 
 </body>
 </html>

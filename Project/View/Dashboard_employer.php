@@ -22,7 +22,7 @@ include "../Controller/Employers.php";
 		<button type = "submit" name = "view_my_job_postings">View My Job Postings</button>
 		<button type = "submit" name = "view_my_schedule">View My Schedule</button>
 		<button type = "submit" name = "view_my_connection">View My Connection</button>
-		<button type = "submit" name = "view_my_reviews">View My Reviews</button>
+		<button type = "submit" name = "view_reviews">View Reviews</button>
 	</form>
 
 	<?php
@@ -116,7 +116,66 @@ include "../Controller/Employers.php";
 			<?php }?>
 		</table>
 	</form>
-	<?php } ?>
+	<?php }
+	if (isset($_GET["view_reviews"])) {
+		?>
+		<form action="Dashboard_applicant.php">
+			<p>Which company do you like to look their reviews?</p>
+			<label for="company">Company</label>
+			<select id="company" name="company">
+			<?php
+			$query = "SELECT * FROM Company";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			while ($row = mysqli_fetch_assoc($result)) {
+				$id = $row['CompanyName'];
+				echo "<option value='$id'>$id</option>";
+			}
+
+			?>
+		</select>
+		<button type="submit" name="search_review">Search</button>
+		</form>
+	<?php
+	}
+	if (isset($_GET["search_review"])) { ?>
+		<form action="Dashboard_applicant.php">
+			<p>Which company do you like to look their reviews?</p>
+			<label for="company">Company</label>
+			<select id="company" name="company">
+			<?php
+			$query = "SELECT * FROM Company";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			echo "<option value=\"" .$_GET['company'] . "\" selected>" .$_GET['company'] . "</option>";
+			while ($row = mysqli_fetch_assoc($result)) {
+				$id = $row['CompanyName'];
+				echo "<option value='$id'>$id</option>";
+			}
+
+			?>
+		</select>
+		<button type="submit" name="search_review">Search</button>
+		</form>
+		<?php
+		$query = "SELECT * FROM review NATURAL JOIN person";
+		$query .= " WHERE CompanyName = \"" . $_GET['company'] . "\"";
+		$result = mysqli_query($connection, $query);
+		if (!$result) {
+			die("Query Failed" . mysqli_error($connection));
+		}
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo $row['Username'] . " reviewed: "; 
+			echo "Rate: " . $row['Rating'];
+			echo "<br>";
+			echo "Comment: " . $row['Comment'];
+			echo "<br><br>";
+		}
+		} ?>
 
 
 </body>
