@@ -1,6 +1,7 @@
 <?php include "../Controller/DB.php";
 include "../Controller/Employers.php";
 ?>
+<link rel="stylesheet" type="text/css" href="template4.css"/>
 <?php 
 	if(isset($_POST['update_job'])) {
 		$jobid = $_POST['update_job'];
@@ -28,9 +29,9 @@ if(deleteJob()) {
 	<title>Modify your Job</title>
 </head>
 <body>
-	<h1>
+	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:4%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 30px;text-align: center">
 		<?php
-		echo "You are going to modify your job with job ID" . $_POST["modify_job"];
+		echo "You are going to modify your posted Job#ID" . $_POST["modify_job"];
 		?>
 	</h1>
 
@@ -71,7 +72,8 @@ if(deleteJob()) {
 		<input id="location" type="text" name="salary" value = <?php echo $row['Salary']; ?>>
 
 		<br>
-		<button type="submit" name="update_job" value= <?php echo $_POST["modify_job"]; ?> >submit</button>
+		<input type="submit" name="update_job" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
+
 
 	</form>
 

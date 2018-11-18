@@ -58,7 +58,7 @@ deleteApplication();
 			die("Query Failed" . mysqli_error($connection));
 		}
 
-		echo "<form action =\"cancel_application.php\" method =\"post\">";
+		echo "<form action =\"Dashboard_applicant.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
 
 		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Employer Cantact_info' . "</td><td>" . 'Status' . "</td></tr>"; 
@@ -98,9 +98,9 @@ deleteApplication();
 	}
 	if (isset($_GET["view_my_connection"])) {
 		?>
-		<p>My Connections</p>
+		<p style= "font-size: 15px;"><b>My Connections</b></p>
 		<form action = "sendRequest.php" method = "post">
-			<table>
+			<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 				<tr>
 					<td>Username</td>
 					<td>Name</td>
@@ -127,9 +127,9 @@ deleteApplication();
 			<button type = "submit" name = "sendRequest">Send Request</button>
 		</form>
 
-		<p>Connection Request</p>
+		<p style= "font-size: 15px;"><b>Connection Request</b></p>
 		<form action = "Dashboard_applicant.php" method = "post">
-		<table>
+		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center >
 			<tr>
 				<td>Username</td>
 				<td>Name</td>
@@ -144,8 +144,8 @@ deleteApplication();
 			while($row = mysqli_fetch_assoc($result)){   
 				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
 				?>
-				<td><button type = "submit" name = "accept">Accept</button></td>
-				<td><button type = "submit" name = "reject">Reject</button></td></tr>
+				<td><button type = "submit" name = "accept" style = " background-color:transparent;color:#FF8C00;font-size: 20"><b>Accept?</b></button></td>
+				<td><button type = "submit" name = "reject" style = " background-color:transparent;color:tomato;font-size: 20"><b>Reject X</b></button></td></tr>
 			<?php }?>
 		</table>
 	</form>
