@@ -38,17 +38,24 @@ function sendRequest() {
 		global $connection;
 
 		$receiver = mysqli_real_escape_string($connection, $_POST['username']);
-
-		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
+		
+		$result = mysqli_query($connection, "SELECT * FROM person WHERE Username='$receiver'");
 		if (!$result) {
-			die("User not found: " . mysqli_error($connection));
+			die("Something went wrong. " . mysqli_error($connection));
 		} else {
+			if($result->num_rows ===0){
+				echo "User not found.";
+			} else {
 			$sender = $_SESSION['username'];
-			$_SESSION['sender'] = $sender;
 
-			$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
-			mysqli_query($connection, $sql);
-			echo "Request sent.";
+			$sql = "INSERT INTO request(Sender_Username, Receiver_Username) VALUES('$sender','$receiver')";
+			$result = mysqli_query($connection, $sql);
+			
+			if(!$result){
+				echo "Something went wrong. " . mysqli_error($connection);
+			} else {
+				echo "Request sent.";}
+			}
 		}
 	}
 }

@@ -1,7 +1,11 @@
+<?php
+include "../Controller/General.php";
+if(isset($_POST['send'])){
+	if(sendRequest()) header("Location:Dashboard_applicant.php?view_my_connection=.php");
+}
+
+?>
 <link rel="stylesheet" type="text/css" href="template5.css"/>
-
-
-
 <!DOCTYPE html>
 
 
@@ -14,7 +18,8 @@
 	<form action="sendRequest.php" method = "post">
 		<label for="username" style="color:#1E90FF;"><b>Username</b></label>
 		<input id="username" type="text" name="username" required>
-		<button type="submit" name="register" style="size:15;">Send</button>
+
+		<button type="submit" name="send" style="size:15;">Send</button>
 
 </body>
 </html>
