@@ -39,7 +39,7 @@ deleteApplication();
 		}
 		echo "<form action =\"apply_job.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
-		echo "<tr ><td><size='3pt'>" . "JobID" . "</td><td>" . 'CompanyName' . "</td><td>" . 'Requirements' . "</td><td>" . 'Description' . "</td><td>" . 'Location' . "</td><td>" . 'Type' . "</td><td>" . 'Salary' . "</td></tr>"; 
+		echo "<tr ><td><b>" . "JobID" . "</td></b><td><b>" . 'CompanyName' . "</td><td><b>" . 'Requirements' . "</td><td><b>" . 'Description' . "</td><td><b>" . 'Location' . "</td><td><b>" . 'Type' . "</td><td><b>" . 'Salary' . "</td><td><b>" . 'Next Step' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Requirements'] . "</td><td>" . $row['Description'] . "</td><td>" . $row['Location'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Salary'] . "</td>";
 			echo "<td><button type = \"submit\" name = \"apply_job\" value = ". $row['JobID'] . ">apply</button></td></tr>"; 
@@ -61,7 +61,7 @@ deleteApplication();
 		echo "<form action =\"Dashboard_applicant.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
 
-		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Employer Cantact_info' . "</td><td>" . 'Status' . "</td></tr>"; 
+		echo "<tr><td><b>" . 'Job ID' . "</td><td><b>" . 'Company Name' . "</td><td><b>" . 'Employer Cantact_info' . "</td><td><b>" . 'Status' . "</td><td><b>" . 'Next Step' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . "Null" . "</td>";
 			echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>"; 
@@ -73,7 +73,7 @@ deleteApplication();
 	if (isset($_GET["view_my_schedule"])) {
 
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
-		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Interviewer' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Form' . "</td></tr>";
+		echo "<tr><td><b>" . 'Job ID' . "</td><td><b>" . 'Company Name' . "</td><td><b>" . 'Interviewer' . "</td><td><b>" . 'Date' . "</td><td><b>" . 'Time' . "</td><td><b>" . 'Length' . "</td><td><b>" . 'Type' . "</td><td><b>". 'Form' . "</td></tr>";
 		$query = "SELECT * FROM evaluation INNER JOIN employer ON employer.SIN = evaluation.Employer_SIN NATURAL JOIN person NATURAL JOIN phoneinterview NATURAL JOIN application";
 		$query .= " WHERE Applicant_SIN = " . $_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
@@ -102,12 +102,12 @@ deleteApplication();
 		<form action = "sendRequest.php" method = "post">
 			<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 				<tr>
-					<td>Username</td>
-					<td>Name</td>
-					<td>Contact Info</td>
-					<td>Physiologocal Info</td>
-					<td>Work Experience</td>
-					<td>Education</td>
+					<td><b>Username</b></td>
+					<td><b>Name</b></td>
+					<td><b>Contact Info</b></td>
+					<td><b>Physiologocal Info</b></td>
+					<td><b>Work Experience</b></td>
+					<td><b>Education</b></td>
 				</tr>
 				<?php
 				$query = "(SELECT * FROM connection INNER JOIN person ON connection.User_Username = person.Username";
@@ -132,8 +132,9 @@ deleteApplication();
 		<form action = "Dashboard_applicant.php" method = "post">
 		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center >
 			<tr>
-				<td>Username</td>
-				<td>Name</td>
+				<td><b>Username</b></td>
+				<td><b>Name</b></td>
+
 			</tr>
 			<?php
 			$query = "SELECT * FROM request INNER JOIN person ON Sender_Username = Username";

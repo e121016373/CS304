@@ -1,6 +1,7 @@
 <?php include "../Controller/DB.php";
 // session_start();
 ?>
+<link rel="stylesheet" type="text/css" href="template3.css"/>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@
 	<title>Job Action</title>
 </head>
 <body>
-	<h1>
+	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:4%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 40px;text-align: center">
 		<?php
 		echo "You are going to take action to Job with JobID" . $_POST["job_action"];
 		?>
@@ -20,14 +21,15 @@
 		echo "<button type = \"submit\" name = \"delete_job\" value = ". $_POST["job_action"] . ">Delete</button>";
 		?>
 	</form>
-	<p>All applicants which apply this job:</p>
+	<p style ="color:tomato;font-size: 18px;"><b>All applicants which apply this job:</b></p>
 	<form action = "set_up_interview.php" method = "post">
-	<table>
+	<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 		<tr>
-			<td>Name</td>
-			<td>SIN</td>
-			<td>Cover Letter</td>
-			<td>Resume</td>
+			<td><b>Name</b></td>
+			<td><b>SIN</b></td>
+			<td><b>Cover Letter</b></td>
+			<td><b>Resume</b></td>
+			<td><b>Next Step</b></td>
 		</tr>
 		<?php
 		$query = "SELECT * FROM application INNER JOIN person ON Applicant_SIN = SIN";

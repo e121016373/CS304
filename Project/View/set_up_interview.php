@@ -1,6 +1,7 @@
 <?php include "../Controller/DB.php";
 // session_start();
 ?>
+<link rel="stylesheet" type="text/css" href="template4.css"/>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@
 	<title>Set up an interview</title>
 </head>
 <body>
-	<h1>Set up an interview</h1>
+	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:4%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 40px;text-align: center">Set up an interview</h1>
 	<form actiinput type= on="set_up_interview.php" method="post">
 		<label for="type">Type</label>
 		<select id = "type" name="type" required>
@@ -34,7 +35,7 @@
 		<input id="form" type="text" name="form" required>
 
 		<br>
-		<input type="submit" name="submit">
+		<input type="submit" name="submit" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
 	</form>
 
 </body>

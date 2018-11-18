@@ -37,7 +37,7 @@ include "../Controller/Employers.php";
 		echo "<form action =\"job_action.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
 
-		echo "<tr><td>" . "JobID" . "</td><td>" . 'CompanyName' . "</td><td>" . 'Requirements' . "</td><td>" . 'Description' . "</td><td>" . 'Location' . "</td><td>" . 'Type' . "</td><td>" . 'Salary' . "</td></tr>"; 
+		echo "<tr><td><b>" . "JobID" . "</td><td><b>" . 'CompanyName' . "</td><td><b>" . 'Requirements' . "</td><td><b>" . 'Description' . "</td><td><b>" . 'Location' . "</td><td><b>" . 'Type' . "</td><td><b>" . 'Salary' . "</td><td><b>" . 'Next Step'. "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Requirements'] . "</td><td>" . $row['Description'] . "</td><td>" . $row['Location'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Salary'] . "</td>";
 			echo "<td><button type = \"submit\" name = \"job_action\" value = ". $row['JobID'] . ">Action</button></tr>"; 
@@ -50,7 +50,7 @@ include "../Controller/Employers.php";
 	}
 	if (isset($_GET["view_my_schedule"])) {
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
-		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Applicant' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Form' . "</td></tr>";
+		echo "<tr><td><b>" . 'Job ID' . "</td><td><b>" . 'Applicant' . "</td><td><b>" . 'Date' . "</td><td><b>" . 'Time' . "</td><td><b>" . 'Length' . "</td><td><b>" . 'Type' . "</td><td><b>". 'Form' . "</td></tr>";
 		$query = "SELECT * FROM interview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person ";
 		$query .= " WHERE Employer_SIN = " . $_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
@@ -65,16 +65,16 @@ include "../Controller/Employers.php";
 
 	if (isset($_GET["view_my_connection"])) {
 		?>
-		<p>My Connections</p>
+		<p style="margin-top: 2%; font-size: 16px;"><b>My Connections</b></p>
 		<form action = "sendRequest.php" method = "post">
-			<table>
+			<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 				<tr>
-					<td>Username</td>
-					<td>Name</td>
-					<td>Contact Info</td>
-					<td>Physiologocal Info</td>
-					<td>Work Experience</td>
-					<td>Education</td>
+					<td><b>Username</b></td>
+					<td><b>Name</b></td>
+					<td><b>Contact Info</b></td>
+					<td><b>Physiologocal Info</b></td>
+					<td><b>Work Experience</b></td>
+					<td><b>Education</b></td>
 				</tr>
 				<?php
 				$query = "(SELECT * FROM connection INNER JOIN person ON connection.User_Username = person.Username";
@@ -91,15 +91,15 @@ include "../Controller/Employers.php";
 				}
 				?>
 			</table>
-			<button type = "submit" name = "sendRequest">Send Request</button>
+			<button type = "submit" name = "sendRequest" style="margin-top: 2%; font-size: 16px;">Send Request</button>
 		</form>
 
-		<p>Connection Request</p>
+		<p style="margin-top: 2%; font-size: 16px;"><b>Connection Request</b></p>
 		<form action = "Dashboard_applicant.php" method = "post">
-		<table>
+		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 			<tr>
-				<td>Username</td>
-				<td>Name</td>
+				<td><b>Username</b></td>
+				<td><b>Name></b></td>
 			</tr>
 			<?php
 			$query = "SELECT * FROM request INNER JOIN person ON Sender_Username = Username";
