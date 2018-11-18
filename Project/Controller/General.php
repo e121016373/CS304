@@ -42,13 +42,15 @@ function sendRequest() {
 		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
 		if (!$result) {
 			die("User not found: " . mysqli_error($connection));
-		} else {
-			$sender = $_SESSION['username'];
-			$_SESSION['sender'] = $sender;
+		}
+		$sender = $_SESSION['username'];
+		$_SESSION['sender'] = $sender;
 
-			$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
-			mysqli_query($connection, $sql);
-			echo "Request sent.";
+		$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
+		if(mysqli_query($connection, $sql)) {
+			echo "Request sent."
+		} else {
+			die("Failed to send request: " . mysqli_error($connection));
 		}
 	}
 }

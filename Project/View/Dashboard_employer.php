@@ -14,7 +14,7 @@ include "../Controller/Employers.php";
 <body>
 	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 55px;text-align: center">
 		<?php
-		echo "Welcome!" . $_SESSION['name'];
+		echo "Welcome! " . $_SESSION['name'];
 		?>
 		
 	</h1>
