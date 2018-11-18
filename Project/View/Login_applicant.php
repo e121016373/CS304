@@ -15,7 +15,7 @@ include "../Controller/General.php";
 			echo "Wrong password/username";
 		}
 	}
-}
+
 
 	
 ?>
