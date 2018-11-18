@@ -4,12 +4,14 @@ drop table if exists Person;
  create table Person
 	(SIN int not null PRIMARY KEY,
 	Password varchar(20) not null,
-	Username varchar(30) not null UNIQUE,
+	Username varchar(30) not null,
 	Name varchar(30) not null,
 	Contact_Info varchar(100) not null,
 	Physiological_Info VarChar (1000) null,
 	Work_Experience Char(255) null,
-	Education VarChar (1000) null);
+	Education VarChar (1000) null,
+	UNIQUE KEY (Username));
+	
 	
 
 drop table if exists Connection; 
@@ -189,7 +191,6 @@ insert into Application
 values('2714', '20180301','2314','I am Jessica chou,I am 22 years old and I graduated from University of British Columbia and major in Computer Sciencw.My height is 5.4 and I born in Korea.','I have been internship at Huawei for two months, mainly working on front-end design and resource package maintenance. At the same time, I have achieved excellent results in all subjects in the school. I focus on the learning process and will adopt multiple opinions in my work. I have a good attitude towards my work and my studies. Easy to get along with, strong sense of teamwork and responsibility, willing to team members and make progress together; work hard, and will be completed carefully for all tasks assigned.
 Strong logical thinking ability, can reasonably plan the relationship between work and life.');
 
-
 insert into Interview
 values('1876', '1 hour','2018-11-15','12:30:00','20180401','2908', 'OnSite Interview', 'Location: 1961 E Mall,Vancouver,BC');
 
@@ -222,21 +223,6 @@ values('kikiloveme','cd1234');
 insert into Connection
 values('nomarllyET','HRlocal111');
 
-
-
-
-
-=======
-
-
-
-insert into Request
-values('HRlocal111','kikiloveme');
-
 insert into Connection
 values('kikiloveme','JeffreeStar');
-
-insert into Connection
-values('kikiloveme','cd1234');
->>>>>>> b366f8b1ce2c4a88e19a3c498bc44c187a6e0731
 

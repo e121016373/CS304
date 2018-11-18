@@ -47,14 +47,12 @@ function sendRequest() {
 				echo "User not found.";
 			} else {
 			$sender = $_SESSION['username'];
-			
-			echo $sender;
-			echo $receiver; 
-			$sql = "INSERT INTO request(Sender_Username, Receiver_Username) VALUES('$sender', '$$receiver')";
+
+			$sql = "INSERT INTO request(Sender_Username, Receiver_Username) VALUES('$sender','$receiver')";
 			$result = mysqli_query($connection, $sql);
 			
 			if(!$result){
-				echo "Something went wrong" . mysqli_error($connection);
+				echo "Something went wrong. " . mysqli_error($connection);
 			} else {
 				echo "Request sent.";}
 			}

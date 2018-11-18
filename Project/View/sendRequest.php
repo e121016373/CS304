@@ -19,7 +19,7 @@ if(isset($_POST['send'])){
 		<label for="username" style="color:#1E90FF;"><b>Username</b></label>
 		<input id="username" type="text" name="username" required>
 
-		<button type="submit" name="register" style="size:15;">Send</button>
+		<button type="submit" name="send" style="size:15;">Send</button>
 
 </body>
 </html>
