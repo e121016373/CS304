@@ -3,8 +3,9 @@
 <head>
 	<title>Post a New Job</title>
 </head>
-<body>
-	<h1>Post a New Job</h1>
+<link rel="stylesheet" type="text/css" href="template4.css"/>
+<body >
+	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:8%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 25px;text-align: center">Post a New Job</h1>
 	<form action="post_job.php" method = "post">
 
 		<label for="JobID">JobID</label>

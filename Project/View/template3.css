@@ -1,0 +1,24 @@
+html, body {
+  background-color:lightblue;
+  background-image: url("../../image/back.jpg");
+  background-position:bottom;
+  background-repeat:repeat;
+  margin: 0;
+  font-family: Calibri, sans-serif;
+  font-size: 13px;
+  text-align: center;
+
+
+}
+form{margin-top:2%;
+   }
+button{
+  border-radius: 12px;
+  font-size: 13px;
+   background-color: #4CAF50;
+   color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}

@@ -12,6 +12,7 @@ include "../Controller/General.php";
 			header("Location:Dashboard_applicant.php");
 			exit();
 	}
+}
 
 	
 ?>
