@@ -73,7 +73,7 @@ function acceptRequest() {
 		
 		$dropRequest = mysqli_query($connection, "DELETE FROM request where Sender_Username='$sender' AND Receiver_Username='$receiver'");
 		$addConnection = mysqli_query($connection, "INSERT INTO connection VALUES('$sender', '$receiver')");
-		$addConnection1 = mysqli_query($connection, "INSERT INTO connection VALUES('$reciver', '$sender')";
+		$addConnection1 = mysqli_query($connection, "INSERT INTO connection VALUES('$reciver', '$sender')");
 
 		if (!$dropRequest or !$addConnection or !$addConnection1) {
 			die("Accept fails. " . mysqli_error($connection));
@@ -83,7 +83,7 @@ function acceptRequest() {
 	}
 }
 
-functio rejectRequest(){
+function rejectRequest(){
 	if(isset($_POST['reject'])){
 		global $connection;
 		
