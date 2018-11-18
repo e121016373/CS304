@@ -3,11 +3,10 @@ include "../Controller/Employers.php";
 include "../Controller/DB.php"
 ?>
 <?php 
-createJobs();
-?>
-<?php 
 if(isset($_POST['post_job'])) {
+	createJobs();
 	header("Location:Dashboard_employer.php");
+	exit();
 }
 ?>
 <link rel="stylesheet" type="text/css" href="template4.css"/>
@@ -53,7 +52,7 @@ if(isset($_POST['post_job'])) {
 		<input id="salary" type="text" name="salary">
 
 		<br>
-		<button type="submit" name="submit">Submit</button>
+		<button type="submit" name="post_job">Submit</button>
 
 
 </body>
