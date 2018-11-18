@@ -57,13 +57,10 @@ deleteApplication();
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
-<<<<<<< HEAD
+
 		echo "<form action =\"cancel_application.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
-=======
-		echo "<form action =\"Dashboard_applicant.php\" method =\"post\">";
-		echo "<table>"; // start a table tag in the HTML
->>>>>>> f8478bc9019b39eef7d98a6892fdaadf7135c606
+
 		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Employer Cantact_info' . "</td><td>" . 'Status' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   
 			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . "Null" . "</td>";
@@ -74,7 +71,7 @@ deleteApplication();
 		
 	}
 	if (isset($_GET["view_my_schedule"])) {
-<<<<<<< HEAD
+
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
 		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Interviewer' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Form' . "</td></tr>";
 		$query = "SELECT * FROM evaluation INNER JOIN employer ON employer.SIN = evaluation.Employer_SIN NATURAL JOIN person NATURAL JOIN phoneinterview NATURAL JOIN application";
@@ -88,11 +85,7 @@ deleteApplication();
 		}
 
 		$query = "SELECT * FROM evaluation INNER JOIN employer ON employer.SIN = evaluation.Employer_SIN NATURAL JOIN person NATURAL JOIN examinterview NATURAL JOIN application";
-=======
-		echo "<table>"; // start a table tag in the HTML
-		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company' . "</td><td>" . 'Interviewer' . "</td><td>" . 'Date' . "</td><td>" . 'Time' . "</td><td>" . 'Length' . "</td><td>" . 'Type' . "</td><td>". 'Form' . "</td></tr>";
-		$query = "SELECT * FROM interview INNER JOIN employer ON employer.SIN = interview.Employer_SIN NATURAL JOIN person NATURAL JOIN application";
->>>>>>> f8478bc9019b39eef7d98a6892fdaadf7135c606
+
 		$query .= " WHERE Applicant_SIN = " . $_SESSION['sin'];
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
