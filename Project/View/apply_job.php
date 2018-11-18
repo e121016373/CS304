@@ -31,7 +31,7 @@ include "../Controller/Applicants.php";
 		<textarea id="resume" type="text" name="resume"></textarea>
 
 		<br>
-
+ 
 		<button type="submit" name="submit">Submit</button>
 	</form>
 

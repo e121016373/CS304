@@ -51,11 +51,11 @@ function registerCompany() {
 
 		$companyName = mysqli_real_escape_string($connection, $_POST['companyName']);
 		$size = mysqli_real_escape_string($connection, $_POST['companySize']);
-		$contactInfo = mysqli_real_escape_string($connection, $_POST['company_info']);
+		$companyInfo = mysqli_real_escape_string($connection, $_POST['company_Info']);
 		$field = mysqli_real_escape_string($connection, $_POST['field']);
 		
-		$sql = "INSERT INTO company(CompanyName, CompanySize, Company_info, Field)
-			VALUES ('$companyName', '$size', '$contactInfo', '$field')";
+		$sql = "INSERT INTO company(CompanyName, CompanySize, Company_Info, Field)
+			VALUES ('$companyName', '$size', '$companyInfo', '$field')";
 
 		$result = mysqli_query($connection, $sql);
 
@@ -102,34 +102,27 @@ function createJobs() {
 	}
 }
 
-function updateJobs() {
-	if(isset($_POST["modify_job"])) {
+function updateJobs($jobid, $companyName, $requirement, $description, $location, $type, $salary) {
+	if(isset($_POST['update_job'])) {
 		global $connection;
 		if (!$connection) {
 			die('Failed to connect: ' . mysqli_error());
 		}
 
-		$jobID = mysqli_real_escape_string($connection, $_POST['jobid']);
-		$jobidQuery = "SELECT * FROM PostedJob WHERE JobID = $jobid";
+		$jobidQuery = "SELECT * FROM PostedJob WHERE JobID = '$jobid'";
+		$result = mysqli_query($connection, $jobidQuery);
 
-		if (!mysqli_query($connection, $jobidQuery)) {
+		if (!$result && mysqli_num_rows($result) <= 0) {
 			die('Failed to find Job ID: '. $jobID);
-		} else {
-			$requirement = mysqli_real_escape_string($connection, $_POST['requirements']);
-			$description = mysqli_real_escape_string($connection, $_POST['description']);
-			$location = mysqli_real_escape_string($connection, $_POST['location']);
-			$type = mysqli_real_escape_string($connection, $_POST['type']);
-			$salary = mysqli_real_escape_string($connection, $_POST['salary']);
-			$employerSIN = mysqli_real_escape_string($connection, $_SESSION['sin']);
-		}
+		} 
 
-		$sql = "UPDATE PostedJob SET Requirements = $requirement, Desrciption = $description, Location = $location, Type = $type, Salary = $salary, Employer_SIN = $employerSIN, WHERE JobID = $jobID";
+		$sql = "UPDATE postedjob SET CompanyName = '$companyName', Requirements = '$requirement', Description = '$description', Location = '$location', Type = '$type', Salary = '$salary' WHERE JobID = '$jobid'";
 
 		if (mysqli_query($connection, $sql)) {
-			echo "Record updated successfully";
+			echo "Job updated successfully";
 			return true;
 		} else {
-			echo "Error updating record: ". mysqli_error($connection);
+			echo "Error updating job: ". mysqli_error($connection);
 		}
 	}
 }

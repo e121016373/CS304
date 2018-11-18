@@ -96,8 +96,60 @@ deleteApplication();
 		}
 		echo "</table>";
 	}
+	if (isset($_GET["view_my_connection"])) {
+		?>
+		<p>My Connections</p>
+		<form action = "sendRequest.php" method = "post">
+			<table>
+				<tr>
+					<td>Username</td>
+					<td>Name</td>
+					<td>Contact Info</td>
+					<td>Physiologocal Info</td>
+					<td>Work Experience</td>
+					<td>Education</td>
+				</tr>
+				<?php
+				$query = "(SELECT * FROM connection INNER JOIN person ON connection.User_Username = person.Username";
+				$query .= " WHERE connection.Connection_Username = \"" . $_SESSION['username'] . "\")";
+				$query .= " UNION";
+				$query .= "(SELECT * FROM connection INNER JOIN person ON connection.Connection_Username = person.Username";
+				$query .= " WHERE connection.User_Username = \"" . $_SESSION['username'] . "\")";
+				$result = mysqli_query($connection, $query);
+				if (!$result) {
+					die("Query Failed" . mysqli_error($connection));
+				}
+				while($row = mysqli_fetch_assoc($result)){   
+					echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . $row['Physiological_Info'] . "</td><td>" . $row['Work_Experience'] . "</td><td>" . $row['Education'] . "</td></tr>";
+				}
+				?>
+			</table>
+			<button type = "submit" name = "sendRequest">Send Request</button>
+		</form>
 
-	?>
+		<p>Connection Request</p>
+		<form action = "Dashboard_applicant.php" method = "post">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td>Name</td>
+			</tr>
+			<?php
+			$query = "SELECT * FROM request INNER JOIN person ON Sender_Username = Username";
+			$query .= " WHERE Receiver_Username = \"" . $_SESSION['username'] . "\"";
+			$result = mysqli_query($connection, $query);
+			if (!$result) {
+				die("Query Failed" . mysqli_error($connection));
+			}
+			while($row = mysqli_fetch_assoc($result)){   
+				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
+				?>
+				<td><button type = "submit" name = "accept">Accept</button></td>
+				<td><button type = "submit" name = "reject">Reject</button></td></tr>
+			<?php }?>
+		</table>
+	</form>
+	<?php } ?>
 
 </body>
 </html>
