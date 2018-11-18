@@ -3,7 +3,7 @@ include "../Controller/Employers.php";
 ?>
 <?php 
 	if(isset($_POST['update_job'])) {
-		$jobid = $_POST['modify_job'];
+		$jobid = $_POST['update_job'];
 		$companyName = $_POST['companyName'];
 		$requirement = $_POST['requirement'];
 		$description = $_POST['description'];			

@@ -58,7 +58,7 @@ deleteApplication();
 			die("Query Failed" . mysqli_error($connection));
 		}
 
-		echo "<form action =\"cancel_application.php\" method =\"post\">";
+		echo "<form action =\"Dashboard_applicant.php\" method =\"post\">";
 		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
 
 		echo "<tr><td>" . 'Job ID' . "</td><td>" . 'Company Name' . "</td><td>" . 'Employer Cantact_info' . "</td><td>" . 'Status' . "</td></tr>"; 
