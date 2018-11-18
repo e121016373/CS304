@@ -1,4 +1,24 @@
-<?php include "../Controller/DB.php"; ?>
+<?php include "../Controller/DB.php";
+include "../Controller/Employers.php";
+?>
+<?php 
+	if(isset($_POST['update_job'])) {
+		$jobid = $_POST['modify_job'];
+		$companyName = $_POST['companyName'];
+		$requirement = $_POST['requirement'];
+		$description = $_POST['description'];			
+		$location = $_POST['location'];
+		$type = $_POST['type'];
+		$salary = $_POST['salary'];
+		updateJobs($jobid, $companyName, $requirement, $description, $location, $type, $salary);
+		// header("Location:Dashboard_employer.php");
+	}
+?>
+<?php 
+if(deleteJob()) {
+	header("Location:Dashboard_employer.php");
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -42,14 +62,15 @@
 
 		<br>
 		<label for="type">Type</label>
-		<input id="type" type="text" name="location" value = <?php echo $row['Type']; ?>>
+		<input id="type" type="text" name="type" value = <?php echo $row['Type']; ?>>
 
 		<br>
 		<label for="salary">Salary</label>
-		<input id="location" type="text" name="location" value = <?php echo $row['Salary']; ?>>
+		<input id="location" type="text" name="salary" value = <?php echo $row['Salary']; ?>>
 
 		<br>
 		<input type="submit" name="update_job">
+
 	</form>
 
 

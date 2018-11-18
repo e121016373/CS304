@@ -2,10 +2,7 @@
 include "../Controller/Employers.php";
 // session_start();
 ?>
-<?php 
-if(deleteJob()) {
-	// header("Location :Dashboard_employer.php?view_my_job_postings=");
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +32,7 @@ if(deleteJob()) {
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
 		}
-		echo "<form action =\"Dashboard_employer.php\" method =\"post\">";
+		echo "<form action =\"modify_job.php\" method =\"post\">";
 		echo "<table>"; // start a table tag in the HTML
 		echo "<tr><td>" . "JobID" . "</td><td>" . 'CompanyName' . "</td><td>" . 'Requirements' . "</td><td>" . 'Description' . "</td><td>" . 'Location' . "</td><td>" . 'Type' . "</td><td>" . 'Salary' . "</td></tr>"; 
 		while($row = mysqli_fetch_assoc($result)){   

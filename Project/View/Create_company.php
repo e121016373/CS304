@@ -31,8 +31,8 @@ Field -->
 
 		<br>
 
-		<label for="company_info">Contact Info</label>
-		<input id="company_info" type="text" name="Contact_info">
+		<label for="company_info">Company Info</label>
+		<input id="company_info" type="text" name="company_info">
 
 		<br>
 		<label for="field">Field</label>
