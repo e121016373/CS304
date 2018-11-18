@@ -43,38 +43,61 @@ function sendRequest() {
 		if (!$result) {
 			die("User not found: " . mysqli_error($connection));
 		} else {
-			$_SESSION['receiver'] = $receiver;
 			$sender = $_SESSION['username'];
 			$_SESSION['sender'] = $sender;
-			$sql = "INSERT INTO Request(Sender, Receiver) VALUES('$sender', '$receiver')";
+
+			$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
 			mysqli_query($connection, $sql);
 			echo "Request sent.";
 		}
 	}
 }
 
-// TODO
-/*
+
 function acceptRequest() {
 	if(isset($_POST["accept"])) {
 		global $connection;
-		$senderQuery = "SELECT Sender FROM Person WHERE '$_SESSION['username'] = Receiver"
-		
 
-		$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES ('$_SESSION['sin']', '$connectionSIN')";
+/* 		$senderQuery = "SELECT Sender FROM Request WHERE '$receiver' = Receiver";
+		$senderList = mysqli_query($connection, $senderQuery);
 
-
-		$connectionSIN = $_SESSION[''];
-
-		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
-		if (!$result) {
-			die("User not found: " . mysqli_error($connection));
+		if(!$senderList) {
+			die("Request not found: " . mysqli_error($connection));
 		} else {
-			$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES('$username')";
-			mysqli_query($connection, $sql);
+			while ($row = mysqli_fetch_assoc($senderList)) {
+
+			}
+		} */
+		$receiver = $_SESSION['username'];
+		$sender = $_POST['accept'];
+		
+		$dropRequest = mysqli_query($connection, "DELETE FROM request where Sender_Username='$sender' AND Receiver_Username='$receiver'");
+		$addConnection = mysqli_query($connection, "INSERT INTO connection VALUES('$sender', '$receiver')");
+		//$addConnection1 = mysqli_query($connection, "INSERT INTO connection VALUES('$reciver', '$sender')");
+
+		if (!$dropRequest or !$addConnection /* or !$addConnection1*/) {
+			die("Accept fails. " . mysqli_error($connection));
+		} else {
 			echo "Request accepted.";
 		}
 	}
 }
-*/
+
+function rejectRequest(){
+	if(isset($_POST['reject'])){
+		global $connection;
+		
+		$receiver = $_SESSION['username'];
+		$sender = $_POST['reject'];
+
+		$dropRequest = mysqli_query($connection, "DELETE FROM request where Sender_Username='$sender' AND Receiver_Username='$receiver'");
+		
+		if(!$dropRequest){
+			die("Reject fails. " . mysqli_error($connection));
+		} else {
+			echo "Reject accepted.";
+		}
+		
+	}
+}
 ?>

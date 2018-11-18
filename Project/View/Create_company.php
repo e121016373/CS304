@@ -1,10 +1,14 @@
 <?php
-
-if(isset($_POST["register_company"])) {
-	header("Location: Register_employer.php");
+include "../Controller/Employers.php";
+include "../Controller/DB.php"
+?>
+<?php
+if(registerCompany()) {
+	//header("Location: Register_employer.php");
 }
 
 ?>
+<link rel="stylesheet" type="text/css" href="template4.css"/>
 
 <!-- CompanyName
 CompanySize
@@ -16,8 +20,8 @@ Field -->
 	<title>Create Company</title>
 </head>
 <body>
-	<h1> Create Your Own Campany</h1>
-	<form action = "Register_employer.php" method = "post">
+	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:4%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 35px;text-align: center"> Create Your Own Campany</h1>
+	<form action = "Create_company.php" method = "post">
 		<label for="companyName">CompanyName</label>
 		<input id="companyName" type="text" name="companyName" required>
 
@@ -28,15 +32,15 @@ Field -->
 
 		<br>
 
-		<label for="company_info">Contact Info</label>
-		<input id="company_info" type="text" name="Contact Info">
+		<label for="company_info">Company Info</label>
+		<input id="company_info" type="text" name="company_info">
 
 		<br>
 		<label for="field">Field</label>
 		<input id="field" type="text" name="field">
 
 		<br>
-		<input type="submit" name="register_company">
+		<input type="submit" name="register_company" style="background-color:#4CAF50;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
 	</form>
 </body>
 </html>
