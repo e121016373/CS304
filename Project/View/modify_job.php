@@ -4,7 +4,7 @@ include "../Controller/Employers.php";
 <link rel="stylesheet" type="text/css" href="template4.css"/>
 <?php 
 	if(isset($_POST['update_job'])) {
-		$jobid = $_POST['modify_job'];
+		$jobid = $_POST['update_job'];
 		$companyName = $_POST['companyName'];
 		$requirement = $_POST['requirement'];
 		$description = $_POST['description'];			
@@ -12,12 +12,14 @@ include "../Controller/Employers.php";
 		$type = $_POST['type'];
 		$salary = $_POST['salary'];
 		updateJobs($jobid, $companyName, $requirement, $description, $location, $type, $salary);
-		// header("Location:Dashboard_employer.php");
+		header("Location:Dashboard_employer.php");
+		exit();
 	}
 ?>
 <?php 
 if(deleteJob()) {
 	header("Location:Dashboard_employer.php");
+	exit();
 }
 ?>
 
@@ -71,6 +73,7 @@ if(deleteJob()) {
 
 		<br>
 		<input type="submit" name="update_job" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
+
 
 	</form>
 
