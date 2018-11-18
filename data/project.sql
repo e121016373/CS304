@@ -226,4 +226,17 @@ values('nomarllyET','HRlocal111');
 
 
 
+=======
+
+
+
+insert into Request
+values('HRlocal111','kikiloveme');
+
+insert into Connection
+values('kikiloveme','JeffreeStar');
+
+insert into Connection
+values('kikiloveme','cd1234');
+>>>>>>> b366f8b1ce2c4a88e19a3c498bc44c187a6e0731
 
