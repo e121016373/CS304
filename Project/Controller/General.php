@@ -43,28 +43,32 @@ function sendRequest() {
 		if (!$result) {
 			die("User not found: " . mysqli_error($connection));
 		} else {
-			$_SESSION['receiver'] = $receiver;
 			$sender = $_SESSION['username'];
 			$_SESSION['sender'] = $sender;
-			$sql = "INSERT INTO Request(Sender, Receiver) VALUES('$sender', '$receiver')";
+
+			$sql = "INSERT INTO Request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
 			mysqli_query($connection, $sql);
 			echo "Request sent.";
 		}
 	}
 }
 
-// TODO
+
 /*
 function acceptRequest() {
 	if(isset($_POST["accept"])) {
 		global $connection;
-		$senderQuery = "SELECT Sender FROM Person WHERE '$_SESSION['username'] = Receiver"
-		
+		$receiver = $_SESSION['username'];
+		$senderQuery = "SELECT Sender FROM Request WHERE '$receiver' = Receiver";
+		$senderList = mysqli_query($connection, $senderQuery);
 
-		$sql = "INSERT INTO Connection(User_SIN, Connection_SIN) VALUES ('$_SESSION['sin']', '$connectionSIN')";
+		if(!$senderList) {
+			die("Request not found: " . mysqli_error($connection));
+		} else {
+			while ($row = mysqli_fetch_assoc($senderList)) {
 
-
-		$connectionSIN = $_SESSION[''];
+			}
+		}
 
 		$result = mysqli_query($connection, "SELECT Username FROM Person WHERE '$username' = Username");
 		if (!$result) {
@@ -76,5 +80,9 @@ function acceptRequest() {
 		}
 	}
 }
+
+
+//TODO reject request
+=======
 */
 ?>

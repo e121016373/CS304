@@ -11,6 +11,9 @@ include "../Controller/General.php";
 		if(login() == 'applicant') {
 			header("Location:Dashboard_applicant.php");
 			exit();
+		} else {
+			echo "Wrong password/username";
+		}
 	}
 }
 

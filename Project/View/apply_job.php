@@ -1,8 +1,10 @@
 <?php
 include "../Controller/Applicants.php";
+
 	if(isset($_POST["submit"])) {
 		if(createApplication()) header("Location:Dashboard_applicant.php");
 	}
+
 ?>
 <link rel="stylesheet" type="text/css" href="template4.css"/>
 <!DOCTYPE html>
