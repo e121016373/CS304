@@ -1,6 +1,19 @@
-
+<?php 
+include "../Controller/DB.php";
+include "../Controller/Applicants.php";
+?>
 <link rel="stylesheet" type="text/css" href="template4.css"/>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+<?php 
+if(isset($_POST['write_review'])) {
+  $companyName = $_POST['write_review'];
+  echo $companyName;
+  writeReview($companyName);
+  header("Location:Dashboard_applicant.php?view_my_schedule=");
+  exit();
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -87,7 +100,8 @@ label.star:before {
 		<label for="comment">Comment</label>
 		<textarea id="comment" type="text" name="comment"></textarea>
 
-		<input type="submit" name="submit" style="background-color:#4CAF50;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
+		<!-- <input type="submit" name="submit" style="background-color:#4CAF50;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px"> -->
+    <button type="submit" name="write_review" style="background-color:#4CAF50;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px" value= <?php echo $_POST['review']; ?>>Submit</button>
 
 		
 	</form>

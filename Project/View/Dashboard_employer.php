@@ -122,8 +122,8 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 	<?php }
 	if (isset($_GET["view_reviews"])) {
 		?>
-		<form action="Dashboard_applicant.php">
-			<p>Which company do you like to look their reviews?</p>
+		<form action="Dashboard_employer.php">
+			<p>Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -144,8 +144,8 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 	<?php
 	}
 	if (isset($_GET["search_review"])) { ?>
-		<form action="Dashboard_applicant.php">
-			<p>Which company do you like to look their reviews?</p>
+		<form action="Dashboard_employer.php">
+			<p>Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -170,13 +170,16 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
-		}
-		while ($row = mysqli_fetch_assoc($result)) {
-			echo $row['Username'] . " reviewed: "; 
-			echo "Rate: " . $row['Rating'];
-			echo "<br>";
-			echo "Comment: " . $row['Comment'];
-			echo "<br><br>";
+		} else if (mysqli_num_rows($result) <= 0) {
+			echo $_GET['company'] . ' does not have any reviews yet.';
+		} else {
+			while ($row = mysqli_fetch_assoc($result)) {
+				echo $row['Username'] . " reviewed: "; 
+				echo "Rate: " . $row['Rating'];
+				echo "<br>";
+				echo "Comment: " . $row['Comment'];
+				echo "<br><br>";
+			}
 		}
 		} ?>
 

@@ -44,7 +44,6 @@ if(isset($_POST['setup_Interview'])) {
 		<input id="form" type="text" name="form" required>
 
 		<br>
-		<!-- <input type="submit" name="submit" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px"> -->
 		<button type="submit" name="setup_Interview" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px" value= <?php echo $_POST['set_up_interview']; ?>> Submit</button>
 	</form>
 
