@@ -142,8 +142,8 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
 				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
 				//echo "<td><button type = \"submit\" name = \"cancel_job\" value = ". $row['ApplicationID'] . ">Cancel</button></td></tr>"; 
 				
-				echo "<td><button type = \"submit\" name = \"accept\" value = ".$row['Username'] .">Accept?</button></td>";
-				echo "<td><button type = \"submit\" name = \"reject\" value = ".$row['Username'] .">Reject X</button></td></tr>";
+				echo "<td><b><button type = \"submit\" name = \"accept\" value = ".$row['Username'] .">Accept?</button></td>";
+				echo "<td><b><button type = \"submit\" name = \"reject\" value = ".$row['Username'] .">Reject X</button></td></tr>";
 			}?>
 		</table>
 	</form>
