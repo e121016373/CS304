@@ -72,7 +72,7 @@ if(deleteJob()) {
 		<input id="location" type="text" name="salary" value = <?php echo $row['Salary']; ?>>
 
 		<br>
-		<input type="submit" name="update_job" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px">
+		<button type="submit" name="update_job" style="background-color:tomato;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; b color: white; font-size: 13px;border-radius: 12px" value= <?php echo $_POST["modify_job"]; ?>>Submit</button>
 
 
 	</form>

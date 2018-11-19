@@ -1,9 +1,13 @@
-<?php include "../Controller/DB.php";
+<?php 
+include "../Controller/DB.php";
 include "../Controller/Employers.php";
+include "../Controller/General.php";
 // session_start();
+
+if (acceptRequest()) header("Location:Dashboard_employer.php?view_my_connection=");
+if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=");
 ?>
 
-?>
 <link rel="stylesheet" type="text/css" href="template3.css"/>
 
 <!DOCTYPE html>
@@ -14,7 +18,7 @@ include "../Controller/Employers.php";
 <body>
 	<h1 style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 55px;text-align: center">
 		<?php
-		echo "Welcome!" . $_SESSION['name'];
+		echo "Welcome! " . $_SESSION['name'];
 		?>
 		
 	</h1>
@@ -95,7 +99,7 @@ include "../Controller/Employers.php";
 		</form>
 
 		<p style="margin-top: 2%; font-size: 16px;"><b>Connection Request</b></p>
-		<form action = "Dashboard_applicant.php" method = "post">
+		<form action = "Dashboard_employer.php" method = "post">
 		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 			<tr>
 				<td><b>Username</b></td>
@@ -110,17 +114,16 @@ include "../Controller/Employers.php";
 			}
 			while($row = mysqli_fetch_assoc($result)){   
 				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
-				?>
-				<td><button type = "submit" name = "accept">Accept</button></td>
-				<td><button type = "submit" name = "reject">Reject</button></td></tr>
-			<?php }?>
+				echo "<td><button type = \"submit\" name = \"accept\" value = ".$row['Username'] .">Accept?</button></td>";
+				echo "<td><button type = \"submit\" name = \"reject\" value = ".$row['Username'] .">Reject X</button></td></tr>";
+			}?>
 		</table>
 	</form>
 	<?php }
 	if (isset($_GET["view_reviews"])) {
 		?>
-		<form action="Dashboard_applicant.php">
-			<p>Which company do you like to look their reviews?</p>
+		<form action="Dashboard_employer.php">
+			<p>Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -141,8 +144,8 @@ include "../Controller/Employers.php";
 	<?php
 	}
 	if (isset($_GET["search_review"])) { ?>
-		<form action="Dashboard_applicant.php">
-			<p>Which company do you like to look their reviews?</p>
+		<form action="Dashboard_employer.php">
+			<p>Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -167,13 +170,16 @@ include "../Controller/Employers.php";
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			die("Query Failed" . mysqli_error($connection));
-		}
-		while ($row = mysqli_fetch_assoc($result)) {
-			echo $row['Username'] . " reviewed: "; 
-			echo "Rate: " . $row['Rating'];
-			echo "<br>";
-			echo "Comment: " . $row['Comment'];
-			echo "<br><br>";
+		} else if (mysqli_num_rows($result) <= 0) {
+			echo $_GET['company'] . ' does not have any reviews yet.';
+		} else {
+			while ($row = mysqli_fetch_assoc($result)) {
+				echo $row['Username'] . " reviewed: "; 
+				echo "Rate: " . $row['Rating'];
+				echo "<br>";
+				echo "Comment: " . $row['Comment'];
+				echo "<br><br>";
+			}
 		}
 		} ?>
 

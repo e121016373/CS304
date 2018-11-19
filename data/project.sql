@@ -83,7 +83,7 @@ create table Application
 	Resume varchar(1000) not null,
 	PRIMARY KEY(ApplicationID,Applicant_SIN),	
     FOREIGN KEY (Applicant_SIN) REFERENCES Person(SIN),
-	FOREIGN KEY (JobID) REFERENCES PostedJob(JobID));
+	FOREIGN KEY (JobID) REFERENCES PostedJob(JobID) ON DELETE CASCADE ON UPDATE CASCADE);
 
 drop table if exists Interview;
 create table Interview
@@ -96,7 +96,7 @@ create table Interview
 	Type char(50) not null,
 	Form varchar(1000) null,
     FOREIGN KEY (Employer_SIN) REFERENCES Person(SIN),
-    FOREIGN key (ApplicationID) REFERENCES Application(ApplicationID));
+    FOREIGN key (ApplicationID) REFERENCES Application(ApplicationID) ON DELETE CASCADE ON UPDATE CASCADE);
 
 drop table if exists Offer;
 create table Offer

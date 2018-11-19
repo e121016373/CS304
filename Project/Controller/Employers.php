@@ -102,6 +102,7 @@ function createJobs() {
 	}
 }
 
+//debugged
 function updateJobs($jobid, $companyName, $requirement, $description, $location, $type, $salary) {
 	if(isset($_POST['update_job'])) {
 		global $connection;
@@ -127,6 +128,8 @@ function updateJobs($jobid, $companyName, $requirement, $description, $location,
 	}
 }
 
+//debugged
+// cannot delete the job once it has application
 function deleteJob() {
 	if (isset($_POST['delete_job'])) {
 		global $connection;
@@ -143,10 +146,6 @@ function deleteJob() {
 			echo "Deleted job successfully.";
 			return true;
 		}
-
-		// how to retrieve job id
-		// something like this:
-		// $_POST['modify_job']
 	}
 }
 
@@ -227,6 +226,34 @@ function viewReview() {
 			}
 		}
 	}	
+}
+
+//debugged
+function setupInterview($applicationID) {
+	if(isset($_POST['setup_Interview'])) {
+		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error($connection));
+		}
+
+		$eResult = mysqli_query($connection, "SELECT Max(EvaluationID) AS MaxID FROM Interview");
+		$row = mysqli_fetch_assoc($eResult);
+		$evaluationID = $row['MaxID'] + 1;
+		$length = mysqli_real_escape_string($connection, $_POST['length']);
+		$date = mysqli_real_escape_string($connection, $_POST['date']);;
+		$time = mysqli_real_escape_string($connection, $_POST['time']);
+		$employerSIN = mysqli_real_escape_string($connection, $_SESSION['sin']);
+		$type = mysqli_real_escape_string($connection, $_POST['type']);
+		$form = mysqli_real_escape_string($connection, $_POST['form']);
+
+		$sql = "INSERT INTO Interview (EvaluationID, Length, Date, Time, Employer_SIN, ApplicationID, Type, Form) VALUES('$evaluationID', '$length', '$date', '$time', '$employerSIN', '$applicationID', '$type', '$form')";
+		$result = mysqli_query($connection, $sql);
+		if(!$result) {
+			die('Failed to query: ' . mysqli_error($connection));
+		}
+		echo 'Interview is set up successfully.';
+		return true;
+	}
 }
 
 ?>

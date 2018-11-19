@@ -40,7 +40,7 @@
 		}
 		while($row = mysqli_fetch_assoc($result)){
 			echo "<tr><td>" . $row['Name'] . "</td><td>" . $row['SIN'] . "</td><td>" . $row['CoverLetter'] . "</td><td>" . $row['Resume'] . "</td>";
-			echo "<td><button type = \"submit\" name = \"set_up_interview\" value = ". $row['Username'] . ">Set Up Interview</button></tr>"; 
+			echo "<td><button type = \"submit\" name = \"set_up_interview\" value = ". $row['ApplicationID'] . ">Set Up Interview</button></tr>"; 
 		} ?>
 	</table>
 </body>
