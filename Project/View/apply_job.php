@@ -17,10 +17,10 @@ include "../Controller/Applicants.php";
 	echo "<h1 > You are going to apply Job with Job ID". $_POST["apply_job"] . "</h1>" ;
 	?>
 	<form action="apply_job.php" method="post">
-		<label for="job_ID"><b>Job ID</b></label>
+		<!--<label for="job_ID"><b>Job ID</b></label>
 		<textarea id="job_ID" type="text" name="job_ID"></textarea>
 		
-		<br>
+		<br>-->
 	
 		<label for="cover_letter"><b>Cover Letter</b></label>
 		<textarea id="cover_letter" type="text" name="cover_letter"></textarea>
@@ -32,7 +32,7 @@ include "../Controller/Applicants.php";
 
 		<br>
  
-		<button type="submit" name="submit">Submit</button>
+		<button type="submit" name="submit" value= <?php echo $_POST["apply_job"]; ?>>Submit</button>
 	</form>
 
 
