@@ -14,7 +14,7 @@ include "../Controller/Applicants.php";
 </head>
 <body style="background-color:transparent;margin-left:auto;margin-right:auto;display:block;margin-top:4%;margin-bottom:0%; border-radius: 12px; color: orange; font-size: 20px;text-align: center">
 	<?php 
-	echo "<h1 > You are going to apply Job with Job ID". $_POST["apply_job"] . "</h1>" ;
+	echo "<h1 > You are going to apply Job with Job ID". $_POST["job_action"] . "</h1>" ;
 	?>
 	<form action="apply_job.php" method="post">
 		<label for="job_ID"><b>Job ID</b></label>
