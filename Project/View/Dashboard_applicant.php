@@ -37,7 +37,7 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
     
 	<?php
 	if(isset($_GET['view_job'])) { ?>
-		<!-- <from action="Dashboard_applicant.php" method ="post">
+		<form action="Dashboard_applicant.php" method ="post">
 			<label for="field">Field</label>
 			<select id="field" name="field">	
 				<option value="Type">
@@ -54,7 +54,7 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
 			<input type="text" name="input">
 			<br>
 			<button type="submit" name="search_job">Search</button>
-		</from> -->
+		</form>
 
 		
 		<form action ="apply_job.php" method ="post">
@@ -95,7 +95,7 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
 			IS
 			<input type="text" name="input">
 			<br>
-			<input type="submit" name="search_job">
+			<button type="submit" name="search_job">Search</button>
 		</from>
 
 		

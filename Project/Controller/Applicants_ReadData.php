@@ -29,7 +29,7 @@ function showJobPostings($sin) {
 function searchJobPostings($sin, $field, $input) {
 	global $connection;
 	$query = "SELECT * FROM postedjob";
-	$query .= " WHERE $field IS \"" . $input . "\"";
+	$query .= " WHERE $field = \"" . $input . "\"";
 	$query .= " AND JobID NOT IN ";
 	$query .= "(SELECT JobID FROM application";
 	$query .= " WHERE Applicant_SIN = $sin)";
