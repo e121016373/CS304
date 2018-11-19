@@ -37,8 +37,13 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
     
 	<?php
 	if(isset($_GET['view_job'])) { ?>
-		<from action="search_job.php" method="post">
-			
+		<!-- <from action="search_job.php" method="post">
+			<option name="field">
+				
+			</option>;
+			<input type="text" name="field"> =
+			<input type="text" name="field"> =
+ -->
 		
 		<form action ="apply_job.php" method ="post">
 		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
@@ -160,8 +165,8 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
 	<?php
 	}
 	if (isset($_GET["search_review"])) { ?>
-		<form action="Dashboard_applicant.php">
-			<p style="margin-top: 2%; font-size: 16px;">Which company do you like to look their reviews?</p>
+		<form action="Dashboard_employer.php">
+			<p style="margin-top: 2%; font-size: 16px;">Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -182,7 +187,7 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
 		</form>
 		<?php
 		viewReviews($_GET['company']);
-		}  ?>
+		} ?>
 
 </body>
 </html>
