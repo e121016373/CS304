@@ -7,15 +7,18 @@
 	include "../Controller/General.php";
 
 	if(isset($_POST["submit"])) {
-		if(login() == 'employer') {
+		$login = login();
+		if($login == 'employer') {
 			header("Location:Dashboard_employer.php");
 			exit();
+		} else if ($login == 'notFound') {
+			echo "User is not found.";
+		} else if ($login == 'wrongPassword') {
+			echo "Wrong password.";
 		} else {
-			echo "Wrong password/user";
+			echo "The given username belongs to an applicant. Please login as an applicant. ";
 		}
 	}
-
-
 ?>
 <link rel="stylesheet" type="text/css" href="template2.css"/>
 

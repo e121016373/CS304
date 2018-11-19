@@ -4,7 +4,7 @@ include "../Controller/DB.php"
 ?>
 <?php
 if(registerCompany()) {
-	//header("Location: Register_employer.php");
+	header("Location: Register_employer.php");
 }
 
 ?>

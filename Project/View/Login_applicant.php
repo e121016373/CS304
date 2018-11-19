@@ -8,11 +8,16 @@
 include "../Controller/General.php";
 
 	if(isset($_POST["submit"])) {
-		if(login() == 'applicant') {
+		$login = login();
+		if($login == 'applicant') {
 			header("Location:Dashboard_applicant.php");
 			exit();
+		} else if ($login == 'notFound') {
+			echo "User is not found.";
+		} else if ($login == 'wrongPassword') {
+			echo "Wrong password.";
 		} else {
-			echo "Wrong password/username";
+			echo "The given username belongs to an employer. Please login as an employer. ";
 		}
 	}
 

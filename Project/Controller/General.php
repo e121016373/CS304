@@ -6,31 +6,37 @@ if(!isset($_SESSION)) session_start();
 function login() {
 	if(isset($_POST["submit"])) {
 		global $connection;
+		if (!$connection) {
+			die('Failed to connect: ' . mysqli_error());
+		}
 		
 		$username = mysqli_real_escape_string($connection, $_POST['username']);
 		$password = mysqli_real_escape_string($connection, $_POST['Password']);
 		
-		$result = mysqli_query($connection, "SELECT * from person WHERE '$username'=Username and '$password'=Password");
-		
-		
-		if (!$result){
+		$result = mysqli_query($connection, "SELECT * FROM person WHERE '$username' = Username");
+		if (!$result) {
 			die("Login Fails " . mysqli_error($connection));
+		} else if (mysqli_num_rows($result) <= 0) {
+			return 'notFound';
 		} else {
-			
+			$result2 = mysqli_query($connection, "SELECT * from person WHERE '$username'=Username and '$password'=Password");
+
+			if (!$result2 || mysqli_num_rows($result2) <= 0) {
+				return 'wrongPassword';
+			}
+
 			$_SESSION['username'] = $username;
 			$row = mysqli_fetch_assoc($result);
 			$_SESSION['name'] = $row['Name'];
 			$_SESSION['sin'] = $row['SIN'];
-			
-			$role = 'employer'; 
+
+			$role = 'employer';
 			$sin = $row['SIN'];
 			if (mysqli_num_rows(mysqli_query($connection, "SELECT * from applicant WHERE SIN='$sin'")) != 0){
 					$role = 'applicant';
 			}
-			return $role;
-			
-		}
-	
+			return $role;			
+		}	
 	}
 }
 

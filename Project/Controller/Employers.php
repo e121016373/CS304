@@ -62,7 +62,7 @@ function registerCompany() {
 		if(!$result) {
 			die("Failed to register company: ".mysqli_error($connection));
 		} else {
-			echo "Record created successfully";
+			echo "Company created successfully";
 			return true;
 		}
 	}
