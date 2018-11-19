@@ -10,6 +10,7 @@ include "../Controller/General.php";
 	if(isset($_POST["submit"])) {
 		$login = login();
 		if($login == 'applicant') {
+			$_SESSION['identity'] = $login;
 			header("Location:Dashboard_applicant.php");
 			exit();
 		} else if ($login == 'notFound') {

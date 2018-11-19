@@ -1,7 +1,13 @@
 <?php
 include "../Controller/General.php";
 if(isset($_POST['send'])){
-	if(sendRequest()) header("Location:Dashboard_applicant.php?view_my_connection=.php");
+	if(sendRequest()) {
+		if($_SESSION['identity'] == 'applicant') {
+			header("Location:Dashboard_applicant.php?view_my_connection=.php");
+		} else {
+			header("Location:Dashboard_employer.php?view_my_connection=.php");
+		}
+	}	
 }
 
 ?>

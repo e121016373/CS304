@@ -9,6 +9,7 @@
 	if(isset($_POST["submit"])) {
 		$login = login();
 		if($login == 'employer') {
+			$_SESSION['identity'] = $login;
 			header("Location:Dashboard_employer.php");
 			exit();
 		} else if ($login == 'notFound') {
