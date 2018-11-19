@@ -227,4 +227,43 @@ insert into Connection
 values('nomarllyET','HRlocal111');
 
 
+insert into PostedJob
+values ('236','AMAZON','Requires undergraduate degree','Database management','Seattle','IT Personnel','20','20180401');
 
+insert into PostedJob
+values ('771','HUAWEI','Requires Computer Science Minor','Product Design','Guangzhou','Engineering Personnel','60','20180402');
+
+insert into PostedJob
+values ('482','GOOGLE','Requires Masters degree','Machine learning Specialist','San Fransisco','Software Developer','80','20180403');
+
+insert into PostedJob
+values ('529','Starbucks','No requirement','Barista','Vancouver','Barista','10','20180404');
+
+insert into PostedJob
+values ('441','APPLE','Requires knowledge in Apple Products','Sales','Vancouver','Sales','15','20180405');
+
+insert into Employer
+values ('20180402','HUAWEI');
+
+insert into Employer
+values ('20180403','GOOGLE');
+
+insert into Employer
+values ('20180404','Starbucks');
+
+insert into Employer
+values ('20180405','APPLE');
+
+
+insert into Person
+values('20180402', '1213uh', 'HUAWEIHR', 'Cora Explorer', 'phone: 7783278827', 'Male, 56 years old', 'I am the engineer of electronic department for 10 years', 'Master of Engineering');
+ 
+insert into Person
+values('20180403', '1213uh', 'GOOGLEHR', 'Bill Builder', 'phone: 7788233635', 'Female, 30 years old', 'I am a developer for Google for 5 years.', 'Master of Computer Science');
+ 
+insert into Person
+values('20180404', '1213uh', 'StarbucksHR', 'Seattle Smith', 'phone: 7782384874', 'Male, 33 years old', 'I am a fresh graduate', 'Bachelor of Arts');
+ 
+insert into Person
+values('20180405', '1213uh', 'APPLEHR', 'Steven Jobs', 'phone: 7785180189', 'Female, 49 years old', 'I am a rapper for 15 years.', 'Master of Phsyics');
+ 
