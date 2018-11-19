@@ -37,13 +37,25 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
     
 	<?php
 	if(isset($_GET['view_job'])) { ?>
-		<!-- <from action="search_job.php" method="post">
-			<option name="field">
-				
-			</option>;
-			<input type="text" name="field"> =
-			<input type="text" name="field"> =
- -->
+		<!-- <from action="Dashboard_applicant.php" method ="post">
+			<label for="field">Field</label>
+			<select id="field" name="field">	
+				<option value="Type">
+					Type
+				</option>
+				<option value="Location">
+					Location
+				</option>
+				<option value="CompanyName">
+					CompanyName
+				</option>
+			</select>
+			IS
+			<input type="text" name="input">
+			<br>
+			<button type="submit" name="search_job">Search</button>
+		</from> -->
+
 		
 		<form action ="apply_job.php" method ="post">
 		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
@@ -63,6 +75,50 @@ if (rejectRequest()) header("Location:Dashboard_applicant.php?view_my_connection
 		</table>
 		</form>
 		<?php 
+	}
+
+	if(isset($_POST['search_job'])) {
+		?>
+		<from action="Dashboard_applicant.php">
+			<label for="field">Field</label>
+			<select id="field" name="field">	
+				<option value="Type">
+					Type
+				</option>
+				<option value="Location">
+					Location
+				</option>
+				<option value="CompanyName">
+					CompanyName
+				</option>
+			</select>
+			IS
+			<input type="text" name="input">
+			<br>
+			<input type="submit" name="search_job">
+		</from>
+
+		
+		<form action ="apply_job.php" method ="post">
+		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
+		<tr>
+			<td><b>JobID</b></td>
+			<td><b>CompanyName</b></td>
+			<td><b>Requirements</b></td>
+			<td><b>Description</b></td>
+			<td><b>Location</b></td>
+			<td><b>Type</b></td>
+			<td><b>Salary</b></td>
+			<td><b>Next Step</b></td>
+		</tr>
+
+		<?php 
+		searchJobPostings($_SESSION['sin'], $_POST['field'], $_POST['input']); ?>
+
+		</table>
+		</form>
+		<?php 
+
 	}
 
 
