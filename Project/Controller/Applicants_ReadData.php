@@ -21,7 +21,7 @@ function showJobPostings($sin) {
 			<td>" . $row['Type'] . "</td>
 			<td>" . $row['Salary'] . "</td>";
 		echo 
-			"<td><button type = \"submit\" name = \"job_action\" value = ". $row['JobID'] . ">Action</button></td>
+			"<td><button type = \"submit\" name = \"apply_job\" value = ". $row['JobID'] . ">Apply</button></td>
 			</tr>"; 
 	}
 }
