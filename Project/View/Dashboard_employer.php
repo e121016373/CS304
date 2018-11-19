@@ -1,5 +1,7 @@
 <?php 
 include "../Controller/DB.php";
+include "../Controller/Employers_ReadData.php";
+include "../Controller/General_ReadData.php";
 include "../Controller/Employers.php";
 include "../Controller/General.php";
 // session_start();
@@ -31,45 +33,49 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 	</form>
 
 	<?php
-	if(isset($_GET['view_my_job_postings'])) {
-		$query = "SELECT * FROM postedjob ";
-		$query .= "WHERE Employer_SIN = ".$_SESSION['sin'];
-		$result = mysqli_query($connection, $query);
-		if (!$result) {
-			die("Query Failed" . mysqli_error($connection));
-		}
+	if(isset($_GET['view_my_job_postings'])) { ?>
 
-		echo "<form action =\"job_action.php\" method =\"post\">";
-		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
+		<form action ="job_action.php" method ="post">;
+		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
 
-		echo "<tr><td><b>" . "JobID" . "</td><td><b>" . 'CompanyName' . "</td><td><b>" . 'Requirements' . "</td><td><b>" . 'Description' . "</td><td><b>" . 'Location' . "</td><td><b>" . 'Type' . "</td><td><b>" . 'Salary' . "</td><td><b>" . 'Next Step'. "</td></tr>"; 
-		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['CompanyName'] . "</td><td>" . $row['Requirements'] . "</td><td>" . $row['Description'] . "</td><td>" . $row['Location'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Salary'] . "</td>";
-			echo "<td><button type = \"submit\" name = \"job_action\" value = ". $row['JobID'] . ">Action</button></tr>"; 
-		}
-		echo "</table >"; //Close the table in HTML 
-		echo "</form>";
-		echo "<form action =\"post_job.php\" method =\"post\">";
-		echo "<button type = \"submit\" name = \"post_new_job\" value = ". $row['JobID'] . ">Post a New Job</button>";
-		echo "</form>";
+		<tr>
+			<td><b>JobID</td>
+			<td><b>CompanyName</td>
+			<td><b>Requirements</td>
+			<td><b>Description</td>
+			<td><b>Location</td>
+			<td><b>Type</td>
+			<td><b>Salary</td>
+			<td><b>Next Step</td>
+		</tr>
+		<?php showJobPostings($_SESSION['sin']); ?>
+	
+		</table>
+		</form>
+		<form action ="post_job.php" method ="post">
+		<button type = "submit" name = "post_new_job">Post a New Job</button>
+		</form>
+		<?php 
 	}
-	if (isset($_GET["view_my_schedule"])) {
-		echo "<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>"; // start a table tag in the HTML
-		echo "<tr><td><b>" . 'Job ID' . "</td><td><b>" . 'Applicant' . "</td><td><b>" . 'Date' . "</td><td><b>" . 'Time' . "</td><td><b>" . 'Length' . "</td><td><b>" . 'Type' . "</td><td><b>". 'Form' . "</td></tr>";
-		$query = "SELECT * FROM interview NATURAL JOIN application INNER JOIN applicant ON applicant.SIN = application.Applicant_SIN NATURAL JOIN person ";
-		$query .= " WHERE Employer_SIN = " . $_SESSION['sin'];
-		$result = mysqli_query($connection, $query);
-		if (!$result) {
-			die("Query Failed" . mysqli_error($connection));
-		}
-		while($row = mysqli_fetch_assoc($result)){   
-			echo "<tr><td>" . $row['JobID'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Date'] . "</td><td>" . $row['Time'] . "</td><td>" . $row['Length'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['Form'] . "</td></tr>";
-		}
-		echo "</table>";
+	if (isset($_GET["view_my_schedule"])) { ?>
+		<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
+			<tr>
+				<td><b>Job ID</td>
+				<td><b>Applicant</td>
+				<td><b>Date</td>
+				<td><b>Time</td>
+				<td><b>Length</td>
+				<td><b>Type</td>
+				<td><b>Form</td>
+			</tr>
+
+			<?php viewMySchedule($_SESSION['sin']); ?>
+		
+		</table>
+		<?php
 	}
 
-	if (isset($_GET["view_my_connection"])) {
-		?>
+	if (isset($_GET["view_my_connection"])) { ?>
 		<p style="margin-top: 2%; font-size: 16px;"><b>My Connections</b></p>
 		<form action = "sendRequest.php" method = "post">
 			<table border=2 cellspacing=0 cellpading=0 width=1200 align=center>
@@ -82,18 +88,7 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 					<td><b>Education</b></td>
 				</tr>
 				<?php
-				$query = "(SELECT * FROM connection INNER JOIN person ON connection.User_Username = person.Username";
-				$query .= " WHERE connection.Connection_Username = \"" . $_SESSION['username'] . "\")";
-				$query .= " UNION";
-				$query .= "(SELECT * FROM connection INNER JOIN person ON connection.Connection_Username = person.Username";
-				$query .= " WHERE connection.User_Username = \"" . $_SESSION['username'] . "\")";
-				$result = mysqli_query($connection, $query);
-				if (!$result) {
-					die("Query Failed" . mysqli_error($connection));
-				}
-				while($row = mysqli_fetch_assoc($result)){   
-					echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Contact_Info'] . "</td><td>" . $row['Physiological_Info'] . "</td><td>" . $row['Work_Experience'] . "</td><td>" . $row['Education'] . "</td></tr>";
-				}
+				viewMyConnection($_SESSION['username']);
 				?>
 			</table>
 			<button type = "submit" name = "sendRequest" style="margin-top: 2%; font-size: 16px;">Send Request</button>
@@ -107,24 +102,17 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 				<td><b>Name></b></td>
 			</tr>
 			<?php
-			$query = "SELECT * FROM request INNER JOIN person ON Sender_Username = Username";
-			$query .= " WHERE Receiver_Username = \"" . $_SESSION['username'] . "\"";
-			$result = mysqli_query($connection, $query);
-			if (!$result) {
-				die("Query Failed" . mysqli_error($connection));
-			}
-			while($row = mysqli_fetch_assoc($result)){   
-				echo "<tr><td>" . $row['Username'] . "</td><td>" . $row['Name'] . "</td>";
-				echo "<td><button type = \"submit\" name = \"accept\" value = ".$row['Username'] .">Accept?</button></td>";
-				echo "<td><button type = \"submit\" name = \"reject\" value = ".$row['Username'] .">Reject X</button></td></tr>";
-			}?>
+			viewMyRequest($_SESSION['username']);
+			?>
 		</table>
 	</form>
-	<?php }
+
+	<?php 
+	}
 	if (isset($_GET["view_reviews"])) {
 		?>
 		<form action="Dashboard_employer.php">
-			<p>Select the company you would like to review.</p>
+			<p style="margin-top: 2%; font-size: 16px;">Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -146,7 +134,7 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 	}
 	if (isset($_GET["search_review"])) { ?>
 		<form action="Dashboard_employer.php">
-			<p>Select the company you would like to review.</p>
+			<p style="margin-top: 2%; font-size: 16px;">Select the company you would like to review.</p>
 			<label for="company">Company</label>
 			<select id="company" name="company">
 			<?php
@@ -166,26 +154,7 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 		<button type="submit" name="search_review">Search</button>
 		</form>
 		<?php
-		$query = "SELECT * FROM review NATURAL JOIN person";
-		$query .= " WHERE CompanyName = \"" . $_GET['company'] . "\"";
-		$result = mysqli_query($connection, $query);
-		if (!$result) {
-			die("Query Failed" . mysqli_error($connection));
-		} else if (mysqli_num_rows($result) <= 0) {
-			echo $_GET['company'] . ' does not have any reviews yet.';
-		} else {
-			while ($row = mysqli_fetch_assoc($result)) {
-				echo $row['Username'] . " reviewed: ";
-				echo "<br>";
-				echo "Rate: ";
-				for($i=0; $i< $row['Rating']; $i++) {
-					echo "<img src=star.png alt=\"Image\" width=20 height=20>";
-				}
-				echo "<br>";
-				echo "Comment: " . $row['Comment'];
-				echo "<br><br>";
-			}
-		}
+		viewReviews($_GET['company']);
 		} ?>
 
 
