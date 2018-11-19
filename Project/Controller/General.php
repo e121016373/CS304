@@ -39,16 +39,26 @@ function sendRequest() {
 		global $connection;
 
 		$receiver = mysqli_real_escape_string($connection, $_POST['username']);
+		$sender = $_SESSION['username'];
 		
 		$result = mysqli_query($connection, "SELECT * FROM person WHERE Username='$receiver'");
-		if (!$result) {
+		
+		$query = "(SELECT * FROM connection WHERE User_Username='$sender' AND Connection_Username='$receiver')";
+		$query .= "UNION";
+		$query .= "(SELECT * FROM connection WHERE User_Username='$receiver' AND Connection_Username='$sender')";
+		$friends = mysqli_query($connection, $query);
 
+		
+		if (!$result) {
 			die("Something went wrong. " . mysqli_error($connection));
 		} else {
+			if ($friends->num_rows !== 0){
+				echo "Already friends.";
+			} else {
 			if($result->num_rows ===0){
 				echo "User not found.";
 			} else {
-				$sender = $_SESSION['username'];
+				
 				$sql = "INSERT INTO request(Sender_Username, Receiver_Username) VALUES('$sender', '$receiver')";
 				$result = mysqli_query($connection, $sql);
 				
@@ -58,6 +68,7 @@ function sendRequest() {
 					echo "Request sent.";
 					return true;
 				}
+			}
 			}
 		}
 	}
