@@ -10,6 +10,7 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 
 <link rel="stylesheet" type="text/css" href="template3.css"/>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -174,8 +175,12 @@ if (rejectRequest()) header("Location:Dashboard_employer.php?view_my_connection=
 			echo $_GET['company'] . ' does not have any reviews yet.';
 		} else {
 			while ($row = mysqli_fetch_assoc($result)) {
-				echo $row['Username'] . " reviewed: "; 
-				echo "Rate: " . $row['Rating'];
+				echo $row['Username'] . " reviewed: ";
+				echo "<br>";
+				echo "Rate: ";
+				for($i=0; $i< $row['Rating']; $i++) {
+					echo "<img src=star.png alt=\"Image\" width=20 height=20>";
+				}
 				echo "<br>";
 				echo "Comment: " . $row['Comment'];
 				echo "<br><br>";

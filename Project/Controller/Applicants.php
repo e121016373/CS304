@@ -160,26 +160,23 @@ function deleteApplication() {
 	}
 }
 
-function writeReview($companyName) {
-	if(isset($_POST['write_review'])) {
-		global $connection;
-		if(!$connection) {
-			die("Failed to connect database: " . mysqli_error($connection));
-		}
-
-		$sin = $_SESSION['sin'];
-		$rating = mysqli_real_escape_string($connection, $_POST['star']);
-		$comment = mysqli_real_escape_string($connection, $_POST['comment']);
-		$sql = "INSERT INTO Review (SIN, CompanyName, Rating, Comment) VALUES ('$sin', '$companyName', '$rating', '$comment')";
-		$result = mysqli_query($connection, $sql);
-		if (!$result) {
-			die('Failed to query: ' . mysqli_error($connection));
-		} else {
-			echo 'Review is stored successfully.';
-			return true;
-		}
-
+function writeReview($companyName, $rate, $comment) {
+	global $connection;
+	if(!$connection) {
+		die("Failed to connect database: " . mysqli_error($connection));
 	}
+	$sin = $_SESSION['sin'];
+	$rating = mysqli_real_escape_string($connection, $rate);
+	$comment = mysqli_real_escape_string($connection, $comment);
+	$sql = "INSERT INTO Review (SIN, CompanyName, Rating, Comment) VALUES ('$sin', '$companyName', '$rating', '$comment')";
+	$result = mysqli_query($connection, $sql);
+	if (!$result) {
+		die('Failed to query: ' . mysqli_error($connection));
+	} else {
+		echo 'Review is stored successfully.';
+		return true;
+	}
+
 }
 
 ?>
