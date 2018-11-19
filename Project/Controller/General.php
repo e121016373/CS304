@@ -46,6 +46,11 @@ function sendRequest() {
 
 		$receiver = mysqli_real_escape_string($connection, $_POST['username']);
 		$sender = $_SESSION['username'];
+
+		if ($receiver == $sender) {
+			echo "Cannot send request to yourself.";
+			return false;
+		}
 		
 		$result = mysqli_query($connection, "SELECT * FROM person WHERE Username='$receiver'");
 		
